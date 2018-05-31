@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Todo</string>
 
+    <!-- Preview -->
+    <string name="dummy">Dummy</string>
+
     <!-- Main Activity -->
     <string name="add_title">Add New</string>
 </resources>
