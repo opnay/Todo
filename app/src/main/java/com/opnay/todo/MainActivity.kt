@@ -1,7 +1,7 @@
 package com.opnay.todo
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import com.opnay.todo.adapter.TodoAdapter
 import com.opnay.todo.data.TodoData
 import kotlinx.android.synthetic.main.activity_main.*
