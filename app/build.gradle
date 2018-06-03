@@ -34,4 +34,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     implementation 'com.github.dimorinny:floating-text-button:0.0.4'
+    implementation 'com.google.code.gson:gson:2.8.4'
 }

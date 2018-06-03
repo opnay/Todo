@@ -6,4 +6,10 @@
 
     <!-- Main Activity -->
     <string name="add_title">Add New</string>
+
+    <!-- AddTodo Activity -->
+    <string name="title_activity_add_todo">Add New Todo</string>
+    <string name="action_settings">Settings</string>
+    <string name="edit_title">Title</string>
+    <string name="edit_info">Info</string>
 </resources>
