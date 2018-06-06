@@ -14,12 +14,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    val pref: SharedPreferences by lazy {
+    private val pref: SharedPreferences by lazy {
         getSharedPreferences("Todo", Activity.MODE_PRIVATE)
-    }
-
-    private val adapter: TodoAdapter by lazy {
-        TodoAdapter(this, TodoPreference.prefData)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +28,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(i)
         }
 
-        main_list.adapter = adapter
+        main_list.adapter = TodoAdapter(this, TodoPreference.prefData)
     }
 
     override fun onPause() {
@@ -49,7 +45,7 @@ class MainActivity : AppCompatActivity() {
     private fun loadPref() {
         val string: String? = pref.getString("Data", "")
         if (string != null) {
-            val value: ArrayList<TodoData>? = Gson().fromJson(string, object:TypeToken<ArrayList<TodoData>>() {}.type)
+            val value: ArrayList<TodoData>? = Gson().fromJson(string, object:TypeToken<ArrayList<TodoData>>(){}.type)
             if (value != null) TodoPreference.prefData = value
         }
     }
