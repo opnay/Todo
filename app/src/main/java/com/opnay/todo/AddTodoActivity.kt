@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
-import android.view.View
 import android.view.inputmethod.InputMethodManager
 import com.opnay.todo.data.TodoData
 import com.opnay.todo.preference.TodoPreference
