@@ -2,7 +2,9 @@ package com.opnay.todo
 
 import android.content.Context
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import com.opnay.todo.data.TodoData
 import com.opnay.todo.preference.TodoPreference
@@ -16,8 +18,16 @@ class AddTodoActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_todo)
         setSupportActionBar(toolbar)
         fab.setOnClickListener { _ ->
-            TodoPreference.prefData.add(TodoData(edit_title_layout.editText!!.text.toString()))
-            finish()
+            if (edit_title_layout.editText!!.text.isEmpty()) {
+                Snackbar.make(add_todo_coordinator, "제목을 다시 입력해주세요.", 1400)
+                        .setAction("OK", { _ ->
+                            edit_title_layout.requestFocus()
+                        }).show()
+                return@setOnClickListener
+            } else {
+                TodoPreference.prefData.add(TodoData(edit_title_layout.editText!!.text.toString()))
+                finish()
+            }
         }
         add_todo_coordinator.setOnClickListener { _ ->
             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
