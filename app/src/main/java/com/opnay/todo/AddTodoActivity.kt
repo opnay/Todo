@@ -33,7 +33,12 @@ class AddTodoActivity : AppCompatActivity() {
                         }).show()
                 return@setOnClickListener
             } else {
-                TodoPreference.prefData.add(TodoData(edit_title.editText!!.text.toString()))
+                TodoData().apply {
+                    title = edit_title.editText!!.text.toString()
+                    desc = edit_desc.editText!!.text.toString()
+                }.run {
+                    TodoPreference.prefData.add(this)
+                }
                 finish()
             }
         }
