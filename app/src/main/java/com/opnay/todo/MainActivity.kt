@@ -43,15 +43,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun savePref() {
-        val editor: SharedPreferences.Editor = pref.edit()
-        editor.putString("Data", Gson().toJson(TodoPreference.prefData))
-        editor.apply()
+        pref.edit().run {
+            putString("Data", Gson().toJson(TodoPreference.prefData))
+            apply()
+        }
     }
 
     private fun loadPref() {
-        val string: String? = pref.getString("Data", "")
-        if (string != null) {
-            val value: ArrayList<TodoData>? = Gson().fromJson(string, object : TypeToken<ArrayList<TodoData>>() {}.type)
+        pref.getString("Data", "")?.run {
+            val value: ArrayList<TodoData>? = Gson().fromJson(this, object : TypeToken<ArrayList<TodoData>>() {}.type)
             if (value != null) TodoPreference.prefData = value
         }
     }
