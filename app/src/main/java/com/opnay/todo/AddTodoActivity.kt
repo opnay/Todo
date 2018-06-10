@@ -16,22 +16,18 @@ class AddTodoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_todo)
         setSupportActionBar(toolbar)
-        fab.setOnClickListener { _ ->
-            if (edit_title_layout.editText!!.text.isEmpty()) {
-                Snackbar.make(add_todo_coordinator, "제목을 다시 입력해주세요.", 1400)
+
+        btn_ok.setOnClickListener { _ ->
+            if (edit_title.editText!!.text.isEmpty()) {
+                Snackbar.make(layout_todo, "제목을 다시 입력해주세요.", 1400)
                         .setAction("OK", { _ ->
-                            edit_title_layout.requestFocus()
+                            edit_title.requestFocus()
                         }).show()
                 return@setOnClickListener
             } else {
-                TodoPreference.prefData.add(TodoData(edit_title_layout.editText!!.text.toString()))
+                TodoPreference.prefData.add(TodoData(edit_title.editText!!.text.toString()))
                 finish()
             }
-        }
-        add_todo_coordinator.setOnClickListener { _ ->
-            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(window.currentFocus.windowToken, 0)
-            window.currentFocus.clearFocus()
         }
     }
 }
