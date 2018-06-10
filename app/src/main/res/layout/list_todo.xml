@@ -9,7 +9,7 @@
         android:id="@+id/todo_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_margin="18dp"
         android:text="@string/dummy"
         android:textSize="@dimen/todo_font"
         app:layout_constraintBottom_toBottomOf="parent"
