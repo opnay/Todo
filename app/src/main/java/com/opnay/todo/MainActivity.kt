@@ -23,8 +23,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         main_add.setOnClickListener { _ ->
-            val i = Intent(this, AddTodoActivity::class.java)
-            startActivity(i)
+            AddTodoActivity.startActivity(this, -1)
         }
 
         loadPref()
