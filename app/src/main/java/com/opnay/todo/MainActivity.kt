@@ -22,13 +22,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        loadPref()
         main_add.setOnClickListener { _ ->
             val i = Intent(this, AddTodoActivity::class.java)
             startActivity(i)
         }
 
+        loadPref()
         main_list.adapter = TodoAdapter(this, TodoPreference.prefData)
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (main_list.adapter as TodoAdapter).notifyDataSetChanged()
     }
 
     override fun onPause() {
