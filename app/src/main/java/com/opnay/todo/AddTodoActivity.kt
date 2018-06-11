@@ -48,6 +48,13 @@ class AddTodoActivity : AppCompatActivity() {
             }
         }
 
+        btn_del.apply {
+            setOnClickListener {
+                TodoPreference.prefData.removeAt(dataIndex)
+                finish()
+            }
+        }
+
         // Load Data
         data.run {
             edit_title.editText!!.setText(title)
