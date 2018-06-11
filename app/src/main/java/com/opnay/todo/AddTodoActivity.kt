@@ -2,8 +2,10 @@ package com.opnay.todo
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import com.opnay.todo.data.TodoData
 import com.opnay.todo.preference.TodoPreference
@@ -49,6 +51,12 @@ class AddTodoActivity : AppCompatActivity() {
         }
 
         btn_del.apply {
+            if (dataIndex < 0) {
+                isEnabled = false
+                ContextCompat.getColor(this@AddTodoActivity, R.color.disableText).let {
+                    setTextColor(it)
+                }
+            }
             setOnClickListener {
                 TodoPreference.prefData.removeAt(dataIndex)
                 finish()
