@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import com.opnay.todo.AddTodoActivity
 import com.opnay.todo.R
 import com.opnay.todo.data.TodoData
 import kotlinx.android.synthetic.main.list_todo.view.*
@@ -30,6 +31,10 @@ class TodoAdapter(val context: Context, val data: ArrayList<TodoData>)
         }
 
         holder.bindView(data[position])
+
+        view.setOnClickListener { _ ->
+            AddTodoActivity.startActivity(context, position)
+        }
         return view
     }
 

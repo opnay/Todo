@@ -13,11 +13,21 @@ class AddTodoActivity : AppCompatActivity() {
     companion object {
         fun startActivity(context: Context, index: Int) {
             // index : -1 -> New Item
-            Intent(context, this::class.java).run {
+            Intent(context, AddTodoActivity::class.java).run {
                 putExtra("INDEX", index)
                 context.startActivity(this)
             }
         }
+    }
+
+    val dataIndex: Int by lazy {
+        this@AddTodoActivity.intent.getIntExtra("INDEX", -1)
+    }
+    val data: TodoData by lazy {
+        if (dataIndex >= 0)
+            TodoPreference.prefData.get(dataIndex)
+        else
+            TodoData()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,14 +43,25 @@ class AddTodoActivity : AppCompatActivity() {
                         }).show()
                 return@setOnClickListener
             } else {
-                TodoData().apply {
-                    title = edit_title.editText!!.text.toString()
-                    desc = edit_desc.editText!!.text.toString()
-                }.run {
-                    TodoPreference.prefData.add(this)
-                }
+                saveData()
                 finish()
             }
+        }
+
+        // Load Data
+        data.run {
+            edit_title.editText!!.setText(title)
+            edit_desc.editText!!.setText(desc)
+        }
+    }
+
+    fun saveData() {
+        data.apply {
+            title = edit_title.editText!!.text.toString()
+            desc = edit_desc.editText!!.text.toString()
+        }. run {
+            if (dataIndex < 0)
+                TodoPreference.prefData.add(this)
         }
     }
 }
