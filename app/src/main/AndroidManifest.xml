@@ -8,10 +8,10 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/App">
         <activity
             android:name=".SplashActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/App.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -21,7 +21,7 @@
         <activity
             android:name=".AddTodoActivity"
             android:label="@string/title_activity_add_todo"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/App.Add" />
     </application>
 
 </manifest>
