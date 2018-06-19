@@ -22,7 +22,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
     implementation "com.android.support:appcompat-v7:$support_version"
     implementation "com.android.support:cardview-v7:$support_version"
@@ -34,5 +34,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     implementation 'com.github.dimorinny:floating-text-button:0.0.4'
+    implementation 'com.github.markushi:circlebutton:1.1'
     implementation 'com.google.code.gson:gson:2.8.4'
 }

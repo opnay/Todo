@@ -6,6 +6,7 @@
 
     <!-- Main Activity -->
     <string name="add_title">Add New</string>
+    <string name="add_type_title">Type new title</string>
 
     <!-- AddTodo Activity -->
     <string name="title_activity_add_todo">Add New Todo</string>
