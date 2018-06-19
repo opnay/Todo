@@ -6,26 +6,28 @@
     android:layout_height="64dp"
     android:background="?android:selectableItemBackground">
 
-    <TextView
-        android:id="@+id/todo_text"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="18dp"
-        android:textSize="@dimen/todo_font"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/todo_check"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        tools:text="Title" />
-
     <CheckBox
         android:id="@+id/todo_check"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/todo_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:textSize="@dimen/todo_font"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/todo_check"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Title" />
+
 </android.support.constraint.ConstraintLayout>
