@@ -55,7 +55,7 @@ class TodoAdapter(val context: Context, val data: ArrayList<TodoData>)
             item.let {
                 with(it) {
                     view.todo_text.text = title
-                    view.todo_check.isChecked = finished
+                    view.todo_check.isChecked = check
                 }
             }
         }

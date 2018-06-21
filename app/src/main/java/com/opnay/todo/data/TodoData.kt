@@ -1,9 +1,9 @@
 package com.opnay.todo.data
 
 class TodoData(var title: String = "", var desc: String = "") {
-    var finished: Boolean = false
+    var check: Boolean = false
 
-    fun toggle() {
-        finished = !finished
+    fun toggle(t: Boolean = !check) {
+        check = t
     }
 }
