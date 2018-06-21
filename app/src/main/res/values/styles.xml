@@ -7,10 +7,6 @@
     <style name="App.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="App.PopupOverlay" parent="ThemeOverlay.AppCompat" />
 
-    <style name="App.Main">
-
-    </style>
-
     <style name="App.Add">
         <item name="android:background">@color/colorPrimary</item>
         <item name="android:colorBackground">@color/colorPrimary</item>
