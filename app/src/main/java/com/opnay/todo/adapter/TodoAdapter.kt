@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.CheckBox
 import com.opnay.todo.AddTodoActivity
 import com.opnay.todo.R
 import com.opnay.todo.data.TodoData
@@ -31,6 +32,9 @@ class TodoAdapter(private val context: Context, val data: ArrayList<TodoData>)
 
         view.setOnClickListener {
             AddTodoActivity.startActivity(context, position)
+        }
+        view.todo_check.setOnClickListener {
+            data[position].toggle((it as CheckBox).isChecked)
         }
         return view
     }
