@@ -10,7 +10,7 @@ import com.opnay.todo.R
 import com.opnay.todo.data.TodoData
 import kotlinx.android.synthetic.main.list_todo.view.*
 
-class TodoAdapter(val context: Context, val data: ArrayList<TodoData>)
+class TodoAdapter(private val context: Context, val data: ArrayList<TodoData>)
     : BaseAdapter() {
     private val layout = R.layout.list_todo
     private lateinit var holder: ViewHolder
@@ -21,9 +21,6 @@ class TodoAdapter(val context: Context, val data: ArrayList<TodoData>)
             view = LayoutInflater.from(context).inflate(layout, null)
             holder = ViewHolder(view)
 
-            view.setOnClickListener({ v ->
-                v.todo_check.toggle()
-            })
             view.tag = holder
         } else {
             view = convertView
@@ -32,31 +29,21 @@ class TodoAdapter(val context: Context, val data: ArrayList<TodoData>)
 
         holder.bindView(data[position])
 
-        view.setOnClickListener { _ ->
+        view.setOnClickListener {
             AddTodoActivity.startActivity(context, position)
         }
         return view
     }
 
-    override fun getItem(position: Int): Any {
-        return data[position]
-    }
-
-    override fun getItemId(position: Int): Long {
-        return 0
-    }
-
-    override fun getCount(): Int {
-        return data.size
-    }
+    override fun getItem(position: Int): Any { return data[position] }
+    override fun getItemId(position: Int): Long { return 0 }
+    override fun getCount(): Int { return data.size }
 
     inner class ViewHolder(val view: View) {
         fun bindView(item: TodoData) {
-            item.let {
-                with(it) {
-                    view.todo_text.text = title
-                    view.todo_check.isChecked = check
-                }
+            item.run {
+                view.todo_text.text = title
+                view.todo_check.isChecked = check
             }
         }
     }
