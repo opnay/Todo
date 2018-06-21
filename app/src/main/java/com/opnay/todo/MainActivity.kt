@@ -1,8 +1,6 @@
 package com.opnay.todo
 
-import android.app.Activity
 import android.content.Context
-import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -11,8 +9,6 @@ import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.opnay.todo.adapter.TodoAdapter
 import com.opnay.todo.data.TodoData
 import com.opnay.todo.preference.TodoPreference
@@ -20,11 +16,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity() {
-
     private var addNew: Boolean = false
-    private val pref: SharedPreferences by lazy {
-        getSharedPreferences("Todo", Activity.MODE_PRIVATE)
-    }
     private val adapter: TodoAdapter by lazy {
         TodoAdapter(this@MainActivity, TodoPreference.prefData)
     }
@@ -65,7 +57,7 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        loadPref()
+        TodoPreference.loadPref(this)
         main_list.adapter = adapter
     }
 
@@ -84,7 +76,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onPause() {
-        savePref()
+        TodoPreference.savePref(this)
         super.onPause()
     }
 
@@ -93,19 +85,6 @@ class MainActivity : AppCompatActivity() {
             showNewAdd(false)
         } else {
             super.onBackPressed()
-        }
-    }
-
-    private fun savePref() {
-        pref.edit().run {
-            putString("Data", Gson().toJson(TodoPreference.prefData))
-            apply()
-        }
-    }
-    private fun loadPref() {
-        pref.getString("Data", "")?.run {
-            val value: ArrayList<TodoData>? = Gson().fromJson(this, object : TypeToken<ArrayList<TodoData>>() {}.type)
-            if (value != null) TodoPreference.prefData = value
         }
     }
 
