@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import android.widget.CheckBox
 import android.widget.TextView
 import com.opnay.todo.AddTodoActivity
 import com.opnay.todo.R
@@ -23,7 +22,6 @@ class TodoAdapter(private val context: Context, val data: ArrayList<TodoData>)
         if (convertView == null) {
             view = LayoutInflater.from(context).inflate(layout, null)
             holder = ViewHolder(view)
-
             view.tag = holder
         } else {
             view = convertView
@@ -33,10 +31,10 @@ class TodoAdapter(private val context: Context, val data: ArrayList<TodoData>)
         holder.bindView(data[position])
 
         view.setOnClickListener { AddTodoActivity.startActivity(context, position) }
-        view.todo_check.setOnClickListener {
-            (it as CheckBox).run {
-                data[position].toggle(isChecked)
-                toggleStrike((this.parent as View).todo_text, isChecked)
+        holder.chk.setOnClickListener {
+            with((it.parent as View).tag as ViewHolder) {
+                data[position].toggle(chk.isChecked)
+                toggleStrike(tv, chk.isChecked)
             }
         }
         return view
@@ -55,11 +53,13 @@ class TodoAdapter(private val context: Context, val data: ArrayList<TodoData>)
     }
 
     inner class ViewHolder(val view: View) {
+        val tv = view.todo_text!!
+        val chk = view.todo_check!!
         fun bindView(item: TodoData) {
             item.run {
-                view.todo_text.text = title
-                view.todo_check.isChecked = check
-                toggleStrike(view.todo_text, check)
+                tv.text = title
+                chk.isChecked = check
+                toggleStrike(tv, check)
             }
         }
     }
