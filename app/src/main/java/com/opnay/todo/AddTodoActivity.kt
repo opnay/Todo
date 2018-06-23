@@ -56,7 +56,7 @@ class AddTodoActivity : AppCompatActivity() {
         btnDel.apply {
             if (dataIndex < 0) {
                 isEnabled = false
-                setTextColor(ContextCompat.getColor(this@AddTodoActivity, R.color.disableText))
+                setTextColor(ContextCompat.getColor(this@AddTodoActivity, R.color.whiteTextDisable))
             }
             setOnClickListener {
                 TodoPreference.prefData.removeAt(dataIndex)

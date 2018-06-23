@@ -4,5 +4,7 @@
     <color name="colorPrimaryDark">#C25E00</color>
     <color name="colorAccent">#FFBD45</color>
 
-    <color name="disableText">#30FFFFFF</color>
+    <color name="whiteText">#FFFFFF</color>
+    <color name="whiteTextSecondary">#DEFFFFFF</color>
+    <color name="whiteTextDisable">#61FFFFFF</color>
 </resources>

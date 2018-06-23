@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/edit_title"
             android:singleLine="true"
-            android:textColor="@android:color/white" />
+            android:textColor="@color/whiteTextSecondary" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -51,7 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/edit_info"
-            android:textColor="@android:color/white" />
+            android:textColor="@color/whiteTextSecondary" />
     </android.support.design.widget.TextInputLayout>
 
     <Button

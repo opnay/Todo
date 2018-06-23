@@ -9,8 +9,8 @@
 
     <style name="App.Add">
         <item name="android:colorBackground">@color/colorPrimary</item>
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:textColorHint">@android:color/white</item>
+        <item name="android:textColor">@color/whiteText</item>
+        <item name="android:textColorHint">@color/whiteText</item>
         <item name="colorAccent">@android:color/white</item>
         <item name="colorControlNormal">@android:color/white</item>
     </style>
