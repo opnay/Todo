@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ru.dimorinny.floatingtextbutton.FloatingTextButton
-        android:id="@+id/main_add"
+        android:id="@+id/fab_btn_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/floating_margin"
