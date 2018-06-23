@@ -5,19 +5,17 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.TextInputEditText
-import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.widget.Button
-import android.widget.TextView
 import com.opnay.todo.data.TodoData
 import com.opnay.todo.preference.TodoPreference
 import kotlinx.android.synthetic.main.activity_add_todo.*
 
-class AddTodoActivity : AppCompatActivity() {
+class ModifyActivity : AppCompatActivity() {
     companion object {
         fun startActivity(context: Context, index: Int) {
             // index : -1 -> New Item
-            Intent(context, AddTodoActivity::class.java).run {
+            Intent(context, ModifyActivity::class.java).run {
                 putExtra("INDEX", index)
                 context.startActivity(this)
             }

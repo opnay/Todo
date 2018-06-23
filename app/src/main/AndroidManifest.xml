@@ -19,9 +19,9 @@
         </activity>
         <activity android:name=".MainActivity" />
         <activity
-            android:name=".AddTodoActivity"
-            android:label="@string/title_activity_add_todo"
-            android:theme="@style/App.Add" />
+            android:name=".ModifyActivity"
+            android:label="@string/title_activity_modify"
+            android:theme="@style/App.Modify" />
     </application>
 
 </manifest>

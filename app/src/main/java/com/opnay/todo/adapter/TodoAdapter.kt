@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
-import com.opnay.todo.AddTodoActivity
+import com.opnay.todo.ModifyActivity
 import com.opnay.todo.R
 import com.opnay.todo.data.TodoData
 import kotlinx.android.synthetic.main.list_todo.view.*
@@ -30,7 +30,7 @@ class TodoAdapter(private val context: Context, val data: ArrayList<TodoData>)
 
         holder.bindView(data[position])
 
-        view.setOnClickListener { AddTodoActivity.startActivity(context, position) }
+        view.setOnClickListener { ModifyActivity.startActivity(context, position) }
         holder.chk.setOnClickListener {
             with((it.parent as View).tag as ViewHolder) {
                 data[position].toggle(chk.isChecked)
