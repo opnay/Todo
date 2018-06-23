@@ -8,16 +8,11 @@
     <style name="App.PopupOverlay" parent="ThemeOverlay.AppCompat" />
 
     <style name="App.Add">
-        <item name="android:background">@color/colorPrimary</item>
         <item name="android:colorBackground">@color/colorPrimary</item>
-        <item name="android:windowBackground">@color/colorPrimary</item>
-
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textColorHint">@android:color/white</item>
-
         <item name="colorAccent">@android:color/white</item>
         <item name="colorControlNormal">@android:color/white</item>
-        <item name="colorControlActivated">@android:color/white</item>
     </style>
 
 </resources>
