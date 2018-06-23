@@ -24,14 +24,10 @@ class AddTodoActivity : AppCompatActivity() {
         }
     }
 
-    val dataIndex: Int by lazy {
-        this@AddTodoActivity.intent.getIntExtra("INDEX", -1)
-    }
-    val data: TodoData by lazy {
-        if (dataIndex >= 0)
-            TodoPreference.prefData.get(dataIndex)
-        else
-            TodoData()
+    private val dataIndex: Int by lazy { intent.getIntExtra("INDEX", -1) }
+    private val data: TodoData by lazy {
+        if (dataIndex >= 0) TodoPreference.prefData[dataIndex]
+        else TodoData()
     }
 
     // View Holder
@@ -60,9 +56,7 @@ class AddTodoActivity : AppCompatActivity() {
         btnDel.apply {
             if (dataIndex < 0) {
                 isEnabled = false
-                ContextCompat
-                        .getColor(this@AddTodoActivity, R.color.disableText)
-                        .let { setTextColor(it) }
+                setTextColor(ContextCompat.getColor(this@AddTodoActivity, R.color.disableText))
             }
             setOnClickListener {
                 TodoPreference.prefData.removeAt(dataIndex)
@@ -77,11 +71,11 @@ class AddTodoActivity : AppCompatActivity() {
         }
     }
 
-    fun saveData() {
+    private fun saveData() {
         data.apply {
             title = tvTitle.text.toString()
             desc = tvDesc.text.toString()
-        }. run {
+        }.run {
             if (dataIndex < 0)
                 TodoPreference.prefData.add(this)
         }
