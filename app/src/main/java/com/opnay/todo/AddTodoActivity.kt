@@ -4,8 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.design.widget.TextInputEditText
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.widget.Button
+import android.widget.TextView
 import com.opnay.todo.data.TodoData
 import com.opnay.todo.preference.TodoPreference
 import kotlinx.android.synthetic.main.activity_add_todo.*
@@ -31,17 +34,22 @@ class AddTodoActivity : AppCompatActivity() {
             TodoData()
     }
 
+    // View Holder
+    private val tvTitle: TextInputEditText by lazy { edit_title.editText as TextInputEditText }
+    private val tvDesc: TextInputEditText by lazy { edit_desc.editText as TextInputEditText }
+    private val btnOK: Button by lazy { btn_ok }
+    private val btnDel: Button by lazy { btn_del }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_todo)
         setSupportActionBar(toolbar)
 
-        btn_ok.setOnClickListener { _ ->
-            if (edit_title.editText!!.text.isEmpty()) {
+        btnOK.setOnClickListener {
+            if (tvTitle.text.isEmpty()) {
                 Snackbar.make(layout_todo, "제목을 다시 입력해주세요.", 1400)
-                        .setAction("OK", { _ ->
-                            edit_title.requestFocus()
-                        }).show()
+                        .setAction("OK") { tvTitle.requestFocus() }
+                        .show()
                 return@setOnClickListener
             } else {
                 saveData()
@@ -49,12 +57,12 @@ class AddTodoActivity : AppCompatActivity() {
             }
         }
 
-        btn_del.apply {
+        btnDel.apply {
             if (dataIndex < 0) {
                 isEnabled = false
-                ContextCompat.getColor(this@AddTodoActivity, R.color.disableText).let {
-                    setTextColor(it)
-                }
+                ContextCompat
+                        .getColor(this@AddTodoActivity, R.color.disableText)
+                        .let { setTextColor(it) }
             }
             setOnClickListener {
                 TodoPreference.prefData.removeAt(dataIndex)
@@ -64,15 +72,15 @@ class AddTodoActivity : AppCompatActivity() {
 
         // Load Data
         data.run {
-            edit_title.editText!!.setText(title)
-            edit_desc.editText!!.setText(desc)
+            tvTitle.setText(title)
+            tvDesc.setText(desc)
         }
     }
 
     fun saveData() {
         data.apply {
-            title = edit_title.editText!!.text.toString()
-            desc = edit_desc.editText!!.text.toString()
+            title = tvTitle.text.toString()
+            desc = tvDesc.text.toString()
         }. run {
             if (dataIndex < 0)
                 TodoPreference.prefData.add(this)
