@@ -1,11 +1,13 @@
 package com.opnay.todo.adapter
 
 import android.content.Context
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.CheckBox
+import android.widget.TextView
 import com.opnay.todo.AddTodoActivity
 import com.opnay.todo.R
 import com.opnay.todo.data.TodoData
@@ -30,11 +32,12 @@ class TodoAdapter(private val context: Context, val data: ArrayList<TodoData>)
 
         holder.bindView(data[position])
 
-        view.setOnClickListener {
-            AddTodoActivity.startActivity(context, position)
-        }
+        view.setOnClickListener { AddTodoActivity.startActivity(context, position) }
         view.todo_check.setOnClickListener {
-            data[position].toggle((it as CheckBox).isChecked)
+            (it as CheckBox).run {
+                data[position].toggle(isChecked)
+                toggleStrike((this.parent as View).todo_text, isChecked)
+            }
         }
         return view
     }
@@ -43,11 +46,20 @@ class TodoAdapter(private val context: Context, val data: ArrayList<TodoData>)
     override fun getItemId(position: Int): Long { return 0 }
     override fun getCount(): Int { return data.size }
 
+    private fun toggleStrike(tv: TextView, en: Boolean = false) {
+        tv.apply {
+            paintFlags =
+                    if(en) paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                    else paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+        }
+    }
+
     inner class ViewHolder(val view: View) {
         fun bindView(item: TodoData) {
             item.run {
                 view.todo_text.text = title
                 view.todo_check.isChecked = check
+                toggleStrike(view.todo_text, check)
             }
         }
     }
