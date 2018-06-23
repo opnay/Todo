@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
+        android:theme="@style/App.AppBarOverlay"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -32,7 +32,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/edit_title"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:textColor="@android:color/white" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -49,7 +50,8 @@
         <android.support.design.widget.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/edit_info" />
+            android:hint="@string/edit_info"
+            android:textColor="@android:color/white" />
     </android.support.design.widget.TextInputLayout>
 
     <Button
