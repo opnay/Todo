@@ -7,6 +7,7 @@ import android.support.constraint.ConstraintLayout
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -48,18 +49,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnNew.isEnabled = false
-        btnNew.setOnClickListener {
-            TodoData().apply {
-                title = etNew.text.toString()
-            }.run {
-                TodoPreference.prefData.add(this)
-                adapter.notifyDataSetChanged()
-            }
-            lstTodo.smoothScrollByOffset(lstTodo.bottom)
-
-            etNew.text.clear()
-            showNewAdd(false)
-            imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
+        btnNew.setOnClickListener { addNewItem() }
+        etNew.setOnKeyListener { _, code, event ->
+            if ((event.action == KeyEvent.ACTION_DOWN) and (code == KeyEvent.KEYCODE_ENTER))
+                return@setOnKeyListener addNewItem()
+            return@setOnKeyListener false
         }
         etNew.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -109,6 +103,21 @@ class MainActivity : AppCompatActivity() {
             layNew.visibility = View.GONE
             fabAdd.visibility = View.VISIBLE
         }
+    }
+
+    private fun addNewItem(): Boolean {
+        TodoData().apply {
+            title = etNew.text.toString()
+        }.run {
+            TodoPreference.prefData.add(this)
+            adapter.notifyDataSetChanged()
+        }
+        lstTodo.smoothScrollByOffset(lstTodo.bottom)
+
+        etNew.text.clear()
+        showNewAdd(false)
+        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
+        return true
     }
 
 }
