@@ -67,15 +67,6 @@ class MainActivity : AppCompatActivity() {
         lstTodo.adapter = adapter
     }
 
-    override fun onConfigurationChanged(newConfig: Configuration?) {
-        super.onConfigurationChanged(newConfig)
-
-        if (newConfig!!.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_YES) {
-            Toast.makeText(this, "keyboard hidden", Toast.LENGTH_SHORT).show();
-            showNewAdd(false)
-        }
-    }
-
     override fun onResume() {
         super.onResume()
         adapter.notifyDataSetChanged()
