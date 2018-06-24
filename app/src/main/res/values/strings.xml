@@ -8,6 +8,9 @@
     <string name="add_title">Add New</string>
     <string name="add_type_title">Type new title</string>
 
+    <string name="drawer_open">Open Drawer</string>
+    <string name="drawer_close">Close Drawer</string>
+
     <!-- Modify Activity -->
     <string name="title_activity_modify">Modify</string>
     <string name="action_settings">Settings</string>

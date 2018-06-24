@@ -3,16 +3,19 @@ package com.opnay.todo
 import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.support.constraint.ConstraintLayout
+import android.support.v4.widget.DrawerLayout
+import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.KeyEvent
+import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ListView
-import android.widget.Toast
 import at.markushi.ui.CircleButton
 import com.opnay.todo.adapter.TodoAdapter
 import com.opnay.todo.data.TodoData
@@ -29,8 +32,12 @@ class MainActivity : AppCompatActivity() {
     private val imm: InputMethodManager by lazy {
         getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     }
+    private val toggle: ActionBarDrawerToggle by lazy {
+        ActionBarDrawerToggle(this, drawer, R.string.drawer_open, R.string.drawer_close)
+    }
 
     // View Holder
+    private val drawer: DrawerLayout by lazy { main_root as DrawerLayout }
     private val lstTodo: ListView by lazy { main_list as ListView }
     private val fabAdd: FloatingTextButton by lazy { fab_btn_add as FloatingTextButton }
     private val layNew: ConstraintLayout by lazy { new_item as ConstraintLayout }
@@ -41,6 +48,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+
+        supportActionBar!!.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setHomeButtonEnabled(true)
+        }
+
+        drawer.addDrawerListener(toggle)
+        toggle.syncState()
 
         fabAdd.setOnClickListener {
             showNewAdd(true)
@@ -67,6 +82,11 @@ class MainActivity : AppCompatActivity() {
         lstTodo.adapter = adapter
     }
 
+    override fun onPostCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
+        super.onPostCreate(savedInstanceState, persistentState)
+        toggle.syncState()
+    }
+
     override fun onResume() {
         super.onResume()
         adapter.notifyDataSetChanged()
@@ -77,12 +97,23 @@ class MainActivity : AppCompatActivity() {
         super.onPause()
     }
 
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (toggle.onOptionsItemSelected(item))
+            return true
+        return super.onOptionsItemSelected(item)
+    }
+
     override fun onBackPressed() {
         if (addNew) {
             showNewAdd(false)
         } else {
             super.onBackPressed()
         }
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration?) {
+        super.onConfigurationChanged(newConfig)
+        toggle.onConfigurationChanged(newConfig)
     }
 
     private fun showNewAdd(en: Boolean) {
