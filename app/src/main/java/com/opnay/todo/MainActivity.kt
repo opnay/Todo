@@ -9,8 +9,8 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.ListView
-import android.widget.TextView
 import android.widget.Toast
 import at.markushi.ui.CircleButton
 import com.opnay.todo.adapter.TodoAdapter
@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
     private val fabAdd: FloatingTextButton by lazy { fab_btn_add as FloatingTextButton }
     private val layNew: ConstraintLayout by lazy { new_item as ConstraintLayout }
     private val btnNew: CircleButton by lazy { new_btn as CircleButton }
-    private val tvNew: TextView by lazy { new_title as TextView }
+    private val etNew: EditText by lazy { new_title as EditText }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,29 +43,29 @@ class MainActivity : AppCompatActivity() {
 
         fabAdd.setOnClickListener {
             showNewAdd(true)
-            tvNew.requestFocus()
+            etNew.requestFocus()
             imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 1)
         }
 
         btnNew.isEnabled = false
         btnNew.setOnClickListener {
             TodoData().apply {
-                title = tvNew.text.toString()
+                title = etNew.text.toString()
             }.run {
                 TodoPreference.prefData.add(this)
                 adapter.notifyDataSetChanged()
             }
             lstTodo.smoothScrollByOffset(lstTodo.bottom)
 
-            tvNew.text = ""
+            etNew.text.clear()
             showNewAdd(false)
             imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
         }
-        tvNew.addTextChangedListener(object : TextWatcher {
+        etNew.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun afterTextChanged(s: Editable?) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                btnNew.isEnabled = tvNew.text.isNotEmpty()
+                btnNew.isEnabled = etNew.text.isNotEmpty()
             }
         })
 
