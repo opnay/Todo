@@ -111,6 +111,7 @@ class MainActivity : AppCompatActivity() {
         }.run {
             TodoPreference.prefData.add(this)
             adapter.notifyDataSetChanged()
+            TodoPreference.savePref(this@MainActivity)
         }
         lstTodo.smoothScrollByOffset(lstTodo.bottom)
 

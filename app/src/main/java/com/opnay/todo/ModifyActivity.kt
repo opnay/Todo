@@ -62,6 +62,11 @@ class ModifyActivity : AppCompatActivity() {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        TodoPreference.savePref(this)
+    }
+
     private fun saveData() {
         data.apply {
             title = tvTitle.text.toString()
