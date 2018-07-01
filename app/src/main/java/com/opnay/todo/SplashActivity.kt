@@ -13,8 +13,7 @@ class SplashActivity : Activity() {
         setContentView(R.layout.activity_splash)
 
         Timer().schedule(2000) {
-            val i = Intent(this@SplashActivity, MainActivity::class.java)
-            this@SplashActivity.startActivity(i)
+            Util.startActivity(this@SplashActivity, MainActivity::class.java)
             this@SplashActivity.finish()
         }
     }
