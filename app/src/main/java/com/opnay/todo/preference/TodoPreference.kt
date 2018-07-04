@@ -20,9 +20,9 @@ class TodoPreference {
         }
         fun loadPref(context: Context) {
             context.getSharedPreferences("Todo", Activity.MODE_PRIVATE)
-                    .getString("Data", "")?.run {
+                    .getString("Data", "").run {
                         gson.fromJson<ArrayList<TodoData>>(this, object : TypeToken<ArrayList<TodoData>>() {}.type)
-                                .run {
+                                ?.run {
                                     prefData = this
                                 }
                     }
