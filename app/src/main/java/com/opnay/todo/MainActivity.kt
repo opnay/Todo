@@ -65,6 +65,13 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this@MainActivity, "Settings", Toast.LENGTH_LONG).show()
                 R.id.menu_info ->
                     Toast.makeText(this@MainActivity, "Info", Toast.LENGTH_LONG).show()
+                else -> {
+                    when(it.groupId) {
+                        R.id.menu_category ->
+                            Toast.makeText(this@MainActivity, navigation.menu.findItem(it.itemId).title, Toast.LENGTH_LONG).show()
+                    }
+                }
+
             }
 
             return@setNavigationItemSelectedListener true
