@@ -5,6 +5,7 @@
     <group android:id="@+id/menu_category">
         <item
             android:id="@+id/cat_all"
+            android:checked="true"
             android:title="@string/category_all" />
     </group>
     <item
