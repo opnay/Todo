@@ -12,6 +12,7 @@
     <string name="drawer_close">Close Drawer</string>
 
     <string name="category_all">All</string>
+    <string name="category_manage">Manage Category</string>
     <string name="menu_app">Application</string>
     <string name="menu_settings">Settings</string>
     <string name="menu_info">Information</string>

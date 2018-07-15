@@ -8,6 +8,9 @@
             android:title="@string/category_all" />
     </group>
     <item
+        android:id="@+id/cat_manage"
+        android:title="@string/category_manage" />
+    <item
         android:id="@+id/menu_info"
         android:title="@string/menu_app">
         <menu>
