@@ -11,7 +11,7 @@
         android:id="@+id/cat_manage"
         android:title="@string/category_manage" />
     <item
-        android:id="@+id/menu_info"
+        android:id="@+id/menu_app"
         android:title="@string/menu_app">
         <menu>
 
