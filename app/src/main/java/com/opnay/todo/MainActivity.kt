@@ -118,11 +118,6 @@ class MainActivity : AppCompatActivity() {
         adapter.notifyDataSetChanged()
     }
 
-    override fun onPause() {
-        TodoPreference.savePref(this)
-        super.onPause()
-    }
-
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (toggle.onOptionsItemSelected(item))
             return true
@@ -159,9 +154,9 @@ class MainActivity : AppCompatActivity() {
         }.run {
             TodoPreference.prefData.add(this)
             adapter.notifyDataSetChanged()
-            TodoPreference.savePref(this@MainActivity)
         }
         lstTodo.smoothScrollByOffset(lstTodo.bottom)
+        TodoPreference.savePref(this)
 
         etNew.text.clear()
         showNewAdd(false)
