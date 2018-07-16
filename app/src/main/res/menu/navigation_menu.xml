@@ -2,17 +2,16 @@
 <menu xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:id="@+id/menu_category">
-        <item
-            android:id="@+id/cat_all"
-            android:checked="true"
-            android:title="@string/category_all" />
-    </group>
+    <group
+        android:id="@+id/menu_category"
+        android:orderInCategory="100"/>
     <item
         android:id="@+id/cat_manage"
-        android:title="@string/category_manage" />
+        android:orderInCategory="400"
+        android:title="@string/category_manage"/>
     <item
         android:id="@+id/menu_app"
+        android:orderInCategory="401"
         android:title="@string/menu_app">
         <menu>
 

@@ -38,6 +38,9 @@ class MainActivity : AppCompatActivity() {
         ActionBarDrawerToggle(this, drawer, R.string.drawer_open, R.string.drawer_close)
     }
 
+    // Category order 100 ~ 400
+    private var catNum = 100
+
     // View Holder
     private val drawer: DrawerLayout by lazy { main_root as DrawerLayout }
     private val navigation: NavigationView by lazy { main_nav as NavigationView }
@@ -76,6 +79,12 @@ class MainActivity : AppCompatActivity() {
 
             return@setNavigationItemSelectedListener true
         }
+
+        // Add Category
+        TodoPreference.catData.forEach { addCategory(it) }
+
+        // Accent Category All
+        navigation.menu.getItem(0).isChecked = true
 
         drawer.addDrawerListener(toggle)
         toggle.syncState()
@@ -158,6 +167,12 @@ class MainActivity : AppCompatActivity() {
         showNewAdd(false)
         imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
         return true
+    }
+
+    private fun addCategory(title: String) {
+        catNum += 1
+        navigation.menu!!
+                .add(R.id.menu_category, catNum, catNum, title)
     }
 
 }
