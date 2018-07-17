@@ -177,7 +177,11 @@ class MainActivity : AppCompatActivity() {
         if (!manage && state != catCur) {   // Show Category
             TodoPreference.catData[state].run {
                 lstTodo.adapter =
-                        TodoAdapter(this@MainActivity, TodoPreference.prefData)
+                        if (state == 0) TodoAdapter(this@MainActivity, TodoPreference.prefData)
+                        else TodoAdapter(
+                                this@MainActivity,
+                                ArrayList(TodoPreference.prefData.filter { it.category == this })
+                        )
                 supportActionBar!!.title = this
             }
         } else if (manage != catManage) {   // Show Category Manage
