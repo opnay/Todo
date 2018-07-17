@@ -31,8 +31,8 @@ class MainActivity : AppCompatActivity() {
         ActionBarDrawerToggle(this, drawer, R.string.drawer_open, R.string.drawer_close)
     }
 
-    // Category order 100 ~ 400
-    private var catNum = 100
+    // Category
+    private var catNum = 0
 
     // ListView Category
     //  0   = Category Manage
@@ -64,14 +64,14 @@ class MainActivity : AppCompatActivity() {
 
             when(it.itemId) {
                 R.id.cat_manage ->
-                    updateList(0)
+                    updateList(-1)
                 R.id.menu_settings ->
                     Toast.makeText(this@MainActivity, "Settings", Toast.LENGTH_LONG).show()
                 R.id.menu_info ->
                     Toast.makeText(this@MainActivity, "Info", Toast.LENGTH_LONG).show()
                 else -> {
                     if (it.groupId == R.id.menu_category)
-                        updateList(it.itemId - 100)
+                        updateList(it.itemId)
                 }
 
             }
@@ -106,7 +106,7 @@ class MainActivity : AppCompatActivity() {
         TodoPreference.loadPref(this)
 
         // Initial
-        updateList(1)
+        updateList(0)
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
@@ -151,7 +151,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun addNewItem(): Boolean {
         etNew.text.toString().run {
-            if (lstState == 0) {    // Add Category
+            if (lstState == -1) {    // Add Category
                 TodoPreference.catData.add(this)
                 addCategory(this)
             } else {
@@ -170,21 +170,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addCategory(title: String) {
-        catNum += 1
         navigation.menu!!
                 .add(R.id.menu_category, catNum, catNum, title)
+        catNum += 1
     }
 
     private fun updateList(state: Int = lstState) {
         if (state != lstState) {
             when (state) {
-                0 -> {
+                -1 -> {
                     lstTodo.adapter =
                             ArrayAdapter<String>(this@MainActivity, android.R.layout.simple_list_item_1, TodoPreference.catData)
                     supportActionBar!!.title = "Category Manage"
                 }
                 else -> {
-                    TodoPreference.catData[state - 1].run {
+                    TodoPreference.catData[state].run {
                         lstTodo.adapter =
                                 TodoAdapter(this@MainActivity, TodoPreference.prefData)
                         supportActionBar!!.title = this
