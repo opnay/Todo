@@ -41,6 +41,7 @@ class ModifyActivity : AppCompatActivity() {
         btnDel.apply {
             setOnClickListener {
                 TodoPreference.prefData.removeAt(dataIndex)
+                TodoPreference.savePref(this@ModifyActivity)
                 finish()
             }
         }
@@ -52,15 +53,11 @@ class ModifyActivity : AppCompatActivity() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        TodoPreference.savePref(this)
-    }
-
     private fun saveData() {
         data.apply {
             title = tvTitle.text.toString()
             desc = tvDesc.text.toString()
         }
+        TodoPreference.savePref(this)
     }
 }
