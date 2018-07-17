@@ -33,12 +33,8 @@ class MainActivity : AppCompatActivity() {
 
     // Category
     private var catNum = 0
-
-    // ListView Category
-    //  0   = Category Manage
-    //  1   = All Category
-    //  2 ~ = Other Category
-    private var lstState = -1
+    private var catCur = -1
+    private var catManage = false
 
     // View Holder
     private val drawer: DrawerLayout by lazy { main_root as DrawerLayout }
@@ -64,14 +60,14 @@ class MainActivity : AppCompatActivity() {
 
             when(it.itemId) {
                 R.id.cat_manage ->
-                    updateList(-1)
+                    updateList(true)
                 R.id.menu_settings ->
                     Toast.makeText(this@MainActivity, "Settings", Toast.LENGTH_LONG).show()
                 R.id.menu_info ->
                     Toast.makeText(this@MainActivity, "Info", Toast.LENGTH_LONG).show()
                 else -> {
                     if (it.groupId == R.id.menu_category)
-                        updateList(it.itemId)
+                        updateList(false, it.itemId)
                 }
 
             }
@@ -100,7 +96,7 @@ class MainActivity : AppCompatActivity() {
         TodoPreference.loadPref(this)
 
         // Initial
-        updateList(0)
+        updateList(false, 0)
 
         // Add Category
         TodoPreference.catData.forEach { addCategory(it) }
@@ -151,7 +147,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun addNewItem(): Boolean {
         etNew.text.toString().run {
-            if (lstState == -1) {    // Add Category
+            if (catManage) {    // Add Category
                 TodoPreference.catData.add(this)
                 addCategory(this)
             } else {
@@ -175,26 +171,25 @@ class MainActivity : AppCompatActivity() {
         catNum += 1
     }
 
-    private fun updateList(state: Int = lstState) {
-        if (state != lstState) {
-            when (state) {
-                -1 -> {
-                    lstTodo.adapter =
-                            ArrayAdapter<String>(this@MainActivity, android.R.layout.simple_list_item_1, TodoPreference.catData)
-                    supportActionBar!!.title = "Category Manage"
-                }
-                else -> {
-                    TodoPreference.catData[state].run {
-                        lstTodo.adapter =
-                                TodoAdapter(this@MainActivity, TodoPreference.prefData)
-                        supportActionBar!!.title = this
-                    }
-                }
+    private fun updateList(manage: Boolean = catManage, state: Int = catCur) {
+        if (!manage && state != catCur) {   // Show Category
+            TodoPreference.catData[state].run {
+                lstTodo.adapter =
+                        TodoAdapter(this@MainActivity, TodoPreference.prefData)
+                supportActionBar!!.title = this
             }
+        } else if (manage != catManage) {   // Show Category Manage
+            lstTodo.adapter =
+                    ArrayAdapter<String>(this@MainActivity, android.R.layout.simple_list_item_1, TodoPreference.catData)
+            supportActionBar!!.title = "Category Manage"
         }
 
+        // Refresh ListView
         (lstTodo.adapter as BaseAdapter).notifyDataSetChanged()
-        lstState = state
+
+        // When manage is true, catCur set as out of index
+        catCur = if (manage) TodoPreference.catData.size else state
+        catManage = manage
     }
 
 }
