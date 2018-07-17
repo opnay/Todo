@@ -79,12 +79,6 @@ class MainActivity : AppCompatActivity() {
             return@setNavigationItemSelectedListener true
         }
 
-        // Add Category
-        TodoPreference.catData.forEach { addCategory(it) }
-
-        // Accent Category All
-        navigation.menu.getItem(0).isChecked = true
-
         drawer.addDrawerListener(toggle)
         toggle.syncState()
 
@@ -107,6 +101,12 @@ class MainActivity : AppCompatActivity() {
 
         // Initial
         updateList(0)
+
+        // Add Category
+        TodoPreference.catData.forEach { addCategory(it) }
+
+        // Accent Category All
+        navigation.menu.getItem(0).isChecked = true
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
