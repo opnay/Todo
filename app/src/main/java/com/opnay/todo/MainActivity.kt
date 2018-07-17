@@ -9,15 +9,11 @@ import android.support.design.widget.NavigationView
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.KeyEvent
 import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import android.widget.ListView
-import android.widget.Toast
+import android.widget.*
 import at.markushi.ui.CircleButton
 import com.opnay.todo.adapter.TodoAdapter
 import com.opnay.todo.data.TodoData
@@ -28,9 +24,6 @@ import ru.dimorinny.floatingtextbutton.FloatingTextButton
 
 class MainActivity : AppCompatActivity() {
     private var addNew: Boolean = false
-    private val adapter: TodoAdapter by lazy {
-        TodoAdapter(this@MainActivity, TodoPreference.prefData)
-    }
     private val imm: InputMethodManager by lazy {
         getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     }
@@ -40,6 +33,12 @@ class MainActivity : AppCompatActivity() {
 
     // Category order 100 ~ 400
     private var catNum = 100
+
+    // ListView Category
+    //  0   = Category Manage
+    //  1   = All Category
+    //  2 ~ = Other Category
+    private var lstState = -1
 
     // View Holder
     private val drawer: DrawerLayout by lazy { main_root as DrawerLayout }
@@ -64,15 +63,15 @@ class MainActivity : AppCompatActivity() {
             drawer.closeDrawer(navigation)
 
             when(it.itemId) {
+                R.id.cat_manage ->
+                    updateList(0)
                 R.id.menu_settings ->
                     Toast.makeText(this@MainActivity, "Settings", Toast.LENGTH_LONG).show()
                 R.id.menu_info ->
                     Toast.makeText(this@MainActivity, "Info", Toast.LENGTH_LONG).show()
                 else -> {
-                    when(it.groupId) {
-                        R.id.menu_category ->
-                            Toast.makeText(this@MainActivity, navigation.menu.findItem(it.itemId).title, Toast.LENGTH_LONG).show()
-                    }
+                    if (it.groupId == R.id.menu_category)
+                        updateList(it.itemId - 100)
                 }
 
             }
@@ -105,7 +104,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         TodoPreference.loadPref(this)
-        lstTodo.adapter = adapter
+
+        // Initial
+        updateList(1)
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
@@ -115,7 +116,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        adapter.notifyDataSetChanged()
+        updateList()
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -153,7 +154,7 @@ class MainActivity : AppCompatActivity() {
             title = etNew.text.toString()
         }.run {
             TodoPreference.prefData.add(this)
-            adapter.notifyDataSetChanged()
+            updateList()
         }
         lstTodo.smoothScrollByOffset(lstTodo.bottom)
         TodoPreference.savePref(this)
@@ -168,6 +169,28 @@ class MainActivity : AppCompatActivity() {
         catNum += 1
         navigation.menu!!
                 .add(R.id.menu_category, catNum, catNum, title)
+    }
+
+    private fun updateList(state: Int = lstState) {
+        if (state != lstState) {
+            when (state) {
+                0 -> {
+                    lstTodo.adapter =
+                            ArrayAdapter<String>(this@MainActivity, android.R.layout.simple_list_item_1, TodoPreference.catData)
+                    supportActionBar!!.title = "Category Manage"
+                }
+                else -> {
+                    TodoPreference.catData[state - 1].run {
+                        lstTodo.adapter =
+                                TodoAdapter(this@MainActivity, TodoPreference.prefData)
+                        supportActionBar!!.title = this
+                    }
+                }
+            }
+        }
+
+        (lstTodo.adapter as BaseAdapter).notifyDataSetChanged()
+        lstState = state
     }
 
 }
