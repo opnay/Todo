@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import com.opnay.todo.data.TodoData
 import com.opnay.todo.preference.TodoPreference
-import kotlinx.android.synthetic.main.activity_add_todo.*
+import kotlinx.android.synthetic.main.activity_modify.*
 
 class ModifyActivity : AppCompatActivity() {
     private val dataIndex: Int by lazy {
@@ -23,7 +23,7 @@ class ModifyActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_todo)
+        setContentView(R.layout.activity_modify)
         setSupportActionBar(toolbar)
 
         btnOK.setOnClickListener {
