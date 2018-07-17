@@ -32,7 +32,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     // Category
-    private var catNum = 0
     private var catCur = -1
     private var catManage = false
 
@@ -97,12 +96,6 @@ class MainActivity : AppCompatActivity() {
 
         // Initial
         updateList(false, 0)
-
-        // Add Category
-        TodoPreference.catData.forEach { addCategory(it) }
-
-        // Accent Category All
-        navigation.menu.getItem(0).isChecked = true
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
@@ -149,7 +142,6 @@ class MainActivity : AppCompatActivity() {
         etNew.text.toString().run {
             if (catManage) {    // Add Category
                 TodoPreference.catData.add(this)
-                addCategory(this)
             } else {
                 TodoPreference.prefData.add(TodoData(title = this))
             }
@@ -165,10 +157,20 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    private fun addCategory(title: String) {
-        navigation.menu!!
-                .add(R.id.menu_category, catNum, catNum, title)
-        catNum += 1
+    private fun updateCategory() {
+        navigation.menu!!.run {
+            // Cleanup Category on menu
+            clear()
+            navigation.inflateMenu(R.menu.navigation_menu)
+
+            // Add Category on menu
+            TodoPreference.catData.forEachIndexed { i, e ->
+                add(R.id.menu_category, i, i, e).apply {
+                    isChecked = (i == catCur)
+                }
+            }
+            findItem(R.id.cat_manage).isChecked = catManage
+        }
     }
 
     private fun updateList(manage: Boolean = catManage, state: Int = catCur) {
@@ -186,10 +188,12 @@ class MainActivity : AppCompatActivity() {
 
         // Refresh ListView
         (lstTodo.adapter as BaseAdapter).notifyDataSetChanged()
-
         // When manage is true, catCur set as out of index
         catCur = if (manage) TodoPreference.catData.size else state
         catManage = manage
+
+        // After this, update category
+        updateCategory()
     }
 
 }
