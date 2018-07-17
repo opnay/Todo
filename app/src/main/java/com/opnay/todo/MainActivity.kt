@@ -150,12 +150,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addNewItem(): Boolean {
-        TodoData().apply {
-            title = etNew.text.toString()
-        }.run {
-            TodoPreference.prefData.add(this)
-            updateList()
+        etNew.text.toString().run {
+            if (lstState == 0) {    // Add Category
+                TodoPreference.catData.add(this)
+                addCategory(this)
+            } else {
+                TodoPreference.prefData.add(TodoData(title = this))
+            }
         }
+
+        updateList()
         lstTodo.smoothScrollByOffset(lstTodo.bottom)
         TodoPreference.savePref(this)
 
