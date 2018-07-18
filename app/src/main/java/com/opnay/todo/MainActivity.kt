@@ -8,6 +8,7 @@ import android.support.constraint.ConstraintLayout
 import android.support.design.widget.NavigationView
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.KeyEvent
 import android.view.MenuItem
@@ -187,6 +188,21 @@ class MainActivity : AppCompatActivity() {
         } else if (manage != catManage) {   // Show Category Manage
             lstTodo.adapter =
                     ArrayAdapter<String>(this@MainActivity, android.R.layout.simple_list_item_1, TodoPreference.catData)
+            lstTodo.setOnItemLongClickListener { _, _, i, _ ->
+                AlertDialog.Builder(this@MainActivity, R.style.App_Dialog).run {
+                    setTitle("Delete category?")
+                    setMessage("All items which include this will delete with this.")
+                    setPositiveButton("Delete") { _, _ ->
+                        TodoPreference.catData.removeAt(i)
+                        TodoPreference.savePref(this@MainActivity)
+                        updateList()
+                    }
+                    setNegativeButton("Cancel") { _, _ -> }
+                    create()
+                    show()
+                }
+                true
+            }
             supportActionBar!!.title = "Category Manage"
         }
 
