@@ -6,6 +6,7 @@
     </style>
     <style name="App.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="App.PopupOverlay" parent="ThemeOverlay.AppCompat" />
+    <style name="App.Dialog" parent="ThemeOverlay.AppCompat.Dialog.Alert" />
 
     <style name="App.Modify">
         <item name="android:colorBackground">@color/colorPrimary</item>
