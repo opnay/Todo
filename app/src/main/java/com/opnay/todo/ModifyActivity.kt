@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.TextInputEditText
 import android.support.v7.app.AppCompatActivity
+import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.Spinner
 import com.opnay.todo.data.TodoData
 import com.opnay.todo.preference.TodoPreference
 import kotlinx.android.synthetic.main.activity_modify.*
@@ -15,7 +17,16 @@ class ModifyActivity : AppCompatActivity() {
     }
     private val data: TodoData by lazy { TodoPreference.prefData[dataIndex] }
 
+    private val spinAdapter by lazy {
+        ArrayAdapter<String>(this, android.R.layout.simple_spinner_item)
+                .apply {
+                    setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                    addAll(TodoPreference.catData)
+                }
+    }
+
     // View Holder
+    private val spinCategory: Spinner by lazy { spin_category as Spinner }
     private val tvTitle: TextInputEditText by lazy { edit_title.editText as TextInputEditText }
     private val tvDesc: TextInputEditText by lazy { edit_desc.editText as TextInputEditText }
     private val btnOK: Button by lazy { btn_ok }
@@ -46,10 +57,18 @@ class ModifyActivity : AppCompatActivity() {
             }
         }
 
+        spinCategory.adapter = spinAdapter
+
         // Load Data
         data.run {
             tvTitle.setText(title)
             tvDesc.setText(desc)
+            spinAdapter.getPosition(category).let {
+                if (it > 0)
+                    spinCategory.setSelection(it)
+                else
+                    spinCategory.setSelection(0)
+            }
         }
     }
 
@@ -57,6 +76,7 @@ class ModifyActivity : AppCompatActivity() {
         data.apply {
             title = tvTitle.text.toString()
             desc = tvDesc.text.toString()
+            category = spinCategory.selectedItem.toString()
         }
         TodoPreference.savePref(this)
     }
