@@ -1,4 +1,4 @@
-# Todo
+# Todo [![Build Status](https://travis-ci.org/opnay/Todo.svg?branch=master)](https://travis-ci.org/opnay/Todo)
 Android Todo Project with kotlin
 
 ## Download
