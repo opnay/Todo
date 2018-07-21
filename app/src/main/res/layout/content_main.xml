@@ -27,9 +27,7 @@
         app:layout_behavior="ru.dimorinny.floatingtextbutton.behavior.SnackbarBehavior"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-    </ru.dimorinny.floatingtextbutton.FloatingTextButton>
+        app:layout_constraintStart_toStartOf="parent" />
 
 
     <android.support.constraint.ConstraintLayout
