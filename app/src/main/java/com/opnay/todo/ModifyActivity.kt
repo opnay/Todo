@@ -35,7 +35,6 @@ class ModifyActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_modify)
-        setSupportActionBar(toolbar)
 
         btnOK.setOnClickListener {
             if (tvTitle.text.isEmpty()) {
