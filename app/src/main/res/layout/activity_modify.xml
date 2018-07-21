@@ -11,10 +11,11 @@
     <Spinner
         android:id="@+id/spin_category"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="@dimen/toolbar_margin"
+        android:layout_marginStart="@dimen/toolbar_margin"
+        android:layout_marginTop="@dimen/toolbar_margin"
+        android:textSize="@dimen/toolbar_font_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/toolbar_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spin_category">

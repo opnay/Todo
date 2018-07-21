@@ -7,4 +7,8 @@
     <dimen name="text_margin">16dp</dimen>
 
     <dimen name="todo_font">18sp</dimen>
+    
+    <!-- Modify Activity -->
+    <dimen name="toolbar_margin">16dp</dimen>
+    <dimen name="toolbar_font_size">20sp</dimen>
 </resources>
