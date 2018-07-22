@@ -63,10 +63,7 @@ class ModifyActivity : AppCompatActivity() {
             tvTitle.setText(title)
             tvDesc.setText(desc)
             spinAdapter.getPosition(category).let {
-                if (it > 0)
-                    spinCategory.setSelection(it)
-                else
-                    spinCategory.setSelection(0)
+                spinCategory.setSelection(maxOf(it, 0))
             }
         }
     }
