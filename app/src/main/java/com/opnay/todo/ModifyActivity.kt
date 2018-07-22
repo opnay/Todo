@@ -18,9 +18,9 @@ class ModifyActivity : AppCompatActivity() {
     private val data: TodoData by lazy { TodoPreference.prefData[dataIndex] }
 
     private val spinAdapter by lazy {
-        ArrayAdapter<String>(this, android.R.layout.simple_spinner_item)
+        ArrayAdapter<String>(this, R.layout.category_spinner_checked)
                 .apply {
-                    setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                    setDropDownViewResource(R.layout.category_spinner)
                     addAll(TodoPreference.catData)
                 }
     }
