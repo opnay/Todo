@@ -38,7 +38,7 @@ class ModifyActivity : AppCompatActivity() {
 
         btnOK.setOnClickListener {
             if (tvTitle.text.isEmpty()) {
-                Snackbar.make(layout_todo, "제목을 다시 입력해주세요.", 1400)
+                Snackbar.make(layout_todo, "제목을 다시 입력해주세요.", Snackbar.LENGTH_LONG)
                         .setAction("OK") { tvTitle.requestFocus() }
                         .show()
                 return@setOnClickListener
