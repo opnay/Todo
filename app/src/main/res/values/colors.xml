@@ -4,7 +4,11 @@
     <color name="colorPrimaryDark">#C25E00</color>
     <color name="colorAccent">#FFBD45</color>
 
+    <!-- Text Color -->
     <color name="whiteText">#FFFFFF</color>
-    <color name="whiteTextSecondary">#DEFFFFFF</color>
+    <color name="whiteTextSecondary">#99FFFFFF</color>
     <color name="whiteTextDisable">#61FFFFFF</color>
+    <color name="blackText">#de000000</color>
+    <color name="blackTextSecondary">#99000000</color>
+    <color name="blackTextDisable">#61000000</color>
 </resources>
