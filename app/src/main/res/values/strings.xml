@@ -17,6 +17,10 @@
     <string name="menu_settings">Settings</string>
     <string name="menu_info">Information</string>
 
+    <!-- Dialog -->
+    <string name="dialog_desc">Description</string>
+    <string name="dialog_ok">Done</string>
+
     <!-- Modify Activity -->
     <string name="title_activity_modify">Modify</string>
     <string name="action_settings">Settings</string>

@@ -7,7 +7,14 @@
     <dimen name="text_margin">16dp</dimen>
 
     <dimen name="todo_font">18sp</dimen>
-    
+
+    <!-- Dialog -->
+    <dimen name="dialog_margin">18dp</dimen>
+    <dimen name="dialog_title_margin">4dp</dimen>
+
+    <dimen name="dialog_title">18sp</dimen>
+    <dimen name="dialog_desc">14sp</dimen>
+
     <!-- Modify Activity -->
     <dimen name="toolbar_margin">16dp</dimen>
     <dimen name="toolbar_font_size">20sp</dimen>

@@ -2,14 +2,13 @@ package com.opnay.todo.adapter
 
 import android.content.Context
 import android.graphics.Paint
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.BaseAdapter
 import android.widget.TextView
 import com.opnay.todo.ModifyActivity
 import com.opnay.todo.R
 import com.opnay.todo.Util
+import com.opnay.todo.app.DetailDialog
 import com.opnay.todo.data.TodoData
 import kotlinx.android.synthetic.main.list_todo.view.*
 
@@ -31,12 +30,13 @@ class TodoAdapter(private val context: Context, val data: ArrayList<TodoData>)
 
         holder.bindView(data[position])
 
-        view.setOnClickListener {
-            Util.startActivity(
-                    context,
-                    ModifyActivity::class.java,
-                    hashMapOf("INDEX" to Util.UtilData(position))
-            )
+        view.apply {
+            setOnClickListener { DetailDialog(context, data[position]).show() }
+            setOnLongClickListener {
+                Util.startActivity(context, ModifyActivity::class.java,
+                        hashMapOf("INDEX" to Util.UtilData(position)))
+                true
+            }
         }
         holder.chk.setOnClickListener {
             with((it.parent as View).tag as ViewHolder) {

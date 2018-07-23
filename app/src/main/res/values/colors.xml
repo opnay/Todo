@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#C25E00</color>
     <color name="colorAccent">#FFBD45</color>
 
+    <color name="dialogBackground">#08000000</color>
+
     <!-- Text Color -->
     <color name="whiteText">#FFFFFF</color>
     <color name="whiteTextSecondary">#99FFFFFF</color>
