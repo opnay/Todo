@@ -7,7 +7,12 @@
     </style>
     <style name="App.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="App.PopupOverlay" parent="ThemeOverlay.AppCompat" />
-    <style name="App.Dialog" parent="ThemeOverlay.AppCompat.Dialog.Alert" />
+    <style name="App.Dialog" parent="ThemeOverlay.AppCompat.Dialog.Alert">
+        <item name="android:windowMinWidthMajor">@android:dimen/dialog_min_width_major</item>
+        <item name="android:windowMinWidthMinor">@android:dimen/dialog_min_width_minor</item>
+        <item name="windowMinWidthMajor">@android:dimen/dialog_min_width_major</item>
+        <item name="windowMinWidthMinor">@android:dimen/dialog_min_width_minor</item>
+    </style>
 
     <style name="App.Modify">
         <item name="android:windowBackground">@color/colorPrimary</item>
