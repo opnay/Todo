@@ -44,7 +44,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="@dimen/dialog_margin">
+            android:paddingLeft="@dimen/dialog_margin"
+            android:paddingRight="@dimen/dialog_margin"
+            android:paddingTop="@dimen/dialog_margin">
 
             <TextView
                 android:layout_width="match_parent"
