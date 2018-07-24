@@ -18,4 +18,8 @@
     <!-- Modify Activity -->
     <dimen name="toolbar_margin">16dp</dimen>
     <dimen name="toolbar_font_size">20sp</dimen>
+
+    <dimen name="modify_text_size">16sp</dimen>
+    <dimen name="modify_title_size">20sp</dimen>
+
 </resources>

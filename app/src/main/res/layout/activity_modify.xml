@@ -20,24 +20,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <android.support.design.widget.TextInputLayout
+    <EditText
         android:id="@+id/edit_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="@dimen/toolbar_margin"
+        android:layout_marginTop="8dp"
+        android:hint="@string/edit_title"
+        android:textColor="@color/whiteText"
+        android:textColorHint="@color/whiteTextSecondary"
+        android:textSize="@dimen/modify_title_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spin_category">
-
-        <android.support.design.widget.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/edit_title"
-            android:singleLine="true"
-            android:textColor="@color/whiteTextSecondary" />
-    </android.support.design.widget.TextInputLayout>
+        app:layout_constraintTop_toBottomOf="@+id/spin_category" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/edit_desc"
@@ -46,6 +42,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:textColorHint="@color/whiteTextSecondary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_title">
@@ -54,7 +51,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/edit_info"
-            android:textColor="@color/whiteTextSecondary" />
+            android:textColor="@color/whiteText"
+            android:textSize="@dimen/modify_text_size" />
     </android.support.design.widget.TextInputLayout>
 
     <Button
@@ -82,4 +80,5 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_ok" />
+
 </android.support.constraint.ConstraintLayout>

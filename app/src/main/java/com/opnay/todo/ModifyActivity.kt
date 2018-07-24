@@ -6,6 +6,7 @@ import android.support.design.widget.TextInputEditText
 import android.support.v7.app.AppCompatActivity
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.EditText
 import android.widget.Spinner
 import com.opnay.todo.data.TodoData
 import com.opnay.todo.preference.TodoPreference
@@ -27,7 +28,7 @@ class ModifyActivity : AppCompatActivity() {
 
     // View Holder
     private val spinCategory: Spinner by lazy { spin_category as Spinner }
-    private val tvTitle: TextInputEditText by lazy { edit_title.editText as TextInputEditText }
+    private val tvTitle: EditText by lazy { edit_title }
     private val tvDesc: TextInputEditText by lazy { edit_desc.editText as TextInputEditText }
     private val btnOK: Button by lazy { btn_ok }
     private val btnDel: Button by lazy { btn_del }
