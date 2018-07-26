@@ -2,7 +2,9 @@ package com.opnay.todo.adapter
 
 import android.content.Context
 import android.graphics.Paint
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import com.opnay.todo.ModifyActivity
