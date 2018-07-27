@@ -1,7 +1,9 @@
-package com.opnay.todo
+package com.opnay.todo.activity
 
 import android.app.Activity
 import android.os.Bundle
+import com.opnay.todo.R
+import com.opnay.todo.Util
 import java.util.*
 import kotlin.concurrent.schedule
 

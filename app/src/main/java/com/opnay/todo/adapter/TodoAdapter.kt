@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
-import com.opnay.todo.ModifyActivity
 import com.opnay.todo.R
 import com.opnay.todo.Util
+import com.opnay.todo.activity.ModifyActivity
 import com.opnay.todo.app.DetailDialog
 import com.opnay.todo.data.TodoData
 import kotlinx.android.synthetic.main.list_todo.view.*

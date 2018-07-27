@@ -1,4 +1,4 @@
-package com.opnay.todo
+package com.opnay.todo.activity
 
 import android.content.Context
 import android.content.res.Configuration
@@ -16,6 +16,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import at.markushi.ui.CircleButton
+import com.opnay.todo.R
 import com.opnay.todo.adapter.TodoAdapter
 import com.opnay.todo.data.TodoData
 import com.opnay.todo.preference.TodoPreference

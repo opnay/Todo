@@ -1,4 +1,4 @@
-package com.opnay.todo
+package com.opnay.todo.activity
 
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -8,6 +8,8 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
+import com.opnay.todo.R
+import com.opnay.todo.Util
 import com.opnay.todo.data.TodoData
 import com.opnay.todo.preference.TodoPreference
 import kotlinx.android.synthetic.main.activity_modify.*
