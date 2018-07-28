@@ -19,10 +19,11 @@ class TodoAdapter(private val context: Context, val data: ArrayList<TodoData>)
     private val layout = R.layout.list_todo
     private lateinit var holder: ViewHolder
     private lateinit var view: View
+    private val inflater: LayoutInflater by lazy { LayoutInflater.from(context) }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         if (convertView == null) {
-            view = LayoutInflater.from(context).inflate(layout, null)
+            view = inflater.inflate(layout, null)
             holder = ViewHolder(view)
             view.tag = holder
         } else {
