@@ -49,7 +49,6 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment, fragment)
-                .addToBackStack(null)
                 .commit()
 
         navigation.setNavigationItemSelectedListener {
