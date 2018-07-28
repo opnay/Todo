@@ -35,5 +35,5 @@ dependencies {
 
     implementation 'com.github.dimorinny:floating-text-button:0.0.4'
     implementation 'com.github.markushi:circlebutton:1.1'
-    implementation 'com.google.code.gson:gson:2.8.4'
+    implementation 'com.google.code.gson:gson:2.8.5'
 }
