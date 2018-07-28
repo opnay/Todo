@@ -49,9 +49,9 @@ class TodoAdapter(private val context: Context, val data: ArrayList<TodoData>)
         return view
     }
 
-    override fun getItem(position: Int): Any { return data[position] }
-    override fun getItemId(position: Int): Long { return 0 }
-    override fun getCount(): Int { return data.size }
+    override fun getItem(position: Int): Any = data[position]
+    override fun getItemId(position: Int): Long = 0
+    override fun getCount(): Int = data.size
 
     private fun toggleStrike(tv: TextView, en: Boolean = false) {
         tv.apply {

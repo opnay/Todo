@@ -51,12 +51,10 @@ class ModifyActivity : AppCompatActivity() {
             }
         }
 
-        btnDel.apply {
-            setOnClickListener {
-                TodoPreference.prefData.removeAt(dataIndex)
-                TodoPreference.savePref(this@ModifyActivity)
-                finish()
-            }
+        btnDel.setOnClickListener {
+            TodoPreference.prefData.removeAt(dataIndex)
+            TodoPreference.savePref(this@ModifyActivity)
+            finish()
         }
 
         spinCategory.adapter = spinAdapter
