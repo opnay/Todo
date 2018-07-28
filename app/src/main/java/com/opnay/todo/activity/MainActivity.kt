@@ -105,9 +105,10 @@ class MainActivity : AppCompatActivity() {
 
     fun updateCategory(curSel: Int) {
         navigation.menu!!.run {
-            // Cleanup Category on menu
-            clear()
-            navigation.inflateMenu(R.menu.navigation_menu)
+            // this.size() - 2[cat_manage / menu_app]
+            for (i in 0 until (this.size() - 2)) {
+                this.removeItem(i)
+            }
 
             // Add Category on menu
             TodoPreference.catData.forEachIndexed { i, e ->
