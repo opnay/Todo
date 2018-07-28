@@ -28,7 +28,7 @@ class ItemFragment: Fragment() {
     // Category
     private var catCur: Int = -1
     private var catManage: Boolean = false
-    private var addNew: Boolean = false
+    var addNew: Boolean = false
 
     private val parent: MainActivity by lazy { activity!! as MainActivity }
     private val imm: InputMethodManager by lazy {

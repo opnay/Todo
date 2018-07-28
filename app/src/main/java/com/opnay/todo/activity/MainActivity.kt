@@ -17,7 +17,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity() {
-    private var addNew: Boolean = false
     private val toggle: ActionBarDrawerToggle by lazy {
         ActionBarDrawerToggle(this, drawer, R.string.drawer_open, R.string.drawer_close)
     }
@@ -95,7 +94,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (addNew) {
+        if (fragment.addNew) {
             fragment.showNewAdd(false)
         } else {
             super.onBackPressed()
