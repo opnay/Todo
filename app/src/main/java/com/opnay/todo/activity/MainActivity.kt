@@ -21,9 +21,6 @@ class MainActivity : AppCompatActivity() {
         ActionBarDrawerToggle(this, drawer, R.string.drawer_open, R.string.drawer_close)
     }
 
-    // Category
-    private var catManage = false
-
     // View Holder
     private val drawer: DrawerLayout by lazy { main_root as DrawerLayout }
     private val navigation: NavigationView by lazy { main_nav as NavigationView }
@@ -118,7 +115,7 @@ class MainActivity : AppCompatActivity() {
                     isChecked = (i == curSel)
                 }
             }
-            findItem(R.id.cat_manage).isChecked = catManage
+            findItem(R.id.cat_manage).isChecked = fragment.catManage
         }
     }
 }
