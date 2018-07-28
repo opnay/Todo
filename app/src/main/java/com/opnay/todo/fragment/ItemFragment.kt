@@ -10,10 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.ArrayAdapter
-import android.widget.BaseAdapter
-import android.widget.EditText
-import android.widget.ListView
+import android.widget.*
 import at.markushi.ui.CircleButton
 import com.opnay.todo.R
 import com.opnay.todo.activity.MainActivity
@@ -33,6 +30,31 @@ class ItemFragment: Fragment() {
     private val parent: MainActivity by lazy { activity!! as MainActivity }
     private val imm: InputMethodManager by lazy {
         parent.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    }
+
+    // Adapter
+    private val categoryAdapter: ArrayAdapter<String> by lazy {
+            ArrayAdapter(parent, android.R.layout.simple_list_item_1, TodoPreference.catData)
+    }
+    private val allItemsAdapter: TodoAdapter
+            by lazy { TodoAdapter(parent, TodoPreference.prefData) }
+
+    // Listener
+    private val categoryLongClickListener by lazy {
+        AdapterView.OnItemLongClickListener { _, _, i, _ ->
+            AlertDialog.Builder(parent, R.style.App_Dialog).apply {
+                setTitle("Delete category?")
+                setMessage("All items which include this will delete with this.")
+                setPositiveButton("Delete") { _, _ ->
+                    TodoPreference.catData.removeAt(i)
+                    TodoPreference.savePref(parent)
+                    updateList()
+                }
+                setNegativeButton("Cancel") { _, _ -> }
+                create()
+            }.show()
+            return@OnItemLongClickListener true
+        }
     }
 
     // Holder
@@ -100,33 +122,14 @@ class ItemFragment: Fragment() {
         if (!manage && state != catCur) {   // Show Category
             TodoPreference.catData[state].run {
                 lstTodo.adapter =
-                        if (state == 0) TodoAdapter(parent, TodoPreference.prefData)
-                        else TodoAdapter(
-                                parent,
-                                ArrayList(TodoPreference.prefData.filter { it.category == this })
-                        )
+                        if (state == 0) allItemsAdapter
+                        else TodoAdapter(parent,
+                                ArrayList(TodoPreference.prefData.filter { it.category == this }))
                 parent.title = this
             }
         } else if (manage != catManage) {   // Show Category Manage
-            lstTodo.adapter =
-                    ArrayAdapter<String>(parent,
-                            android.R.layout.simple_list_item_1,
-                            TodoPreference.catData)
-            lstTodo.setOnItemLongClickListener { _, _, i, _ ->
-                AlertDialog.Builder(parent, R.style.App_Dialog).run {
-                    setTitle("Delete category?")
-                    setMessage("All items which include this will delete with this.")
-                    setPositiveButton("Delete") { _, _ ->
-                        TodoPreference.catData.removeAt(i)
-                        TodoPreference.savePref(parent)
-                        updateList()
-                    }
-                    setNegativeButton("Cancel") { _, _ -> }
-                    create()
-                    show()
-                }
-                true
-            }
+            lstTodo.adapter = categoryAdapter
+            lstTodo.onItemLongClickListener = categoryLongClickListener
             parent.title = "Category Manage"
         }
 
