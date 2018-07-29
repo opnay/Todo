@@ -3,7 +3,6 @@ package com.opnay.todo.fragment
 import android.content.Context
 import android.os.Bundle
 import android.support.constraint.ConstraintLayout
-import android.support.v4.app.Fragment
 import android.support.v7.app.AlertDialog
 import android.view.KeyEvent
 import android.view.LayoutInflater
@@ -20,7 +19,7 @@ import com.opnay.todo.preference.TodoPreference
 import kotlinx.android.synthetic.main.fragment_item_list.view.*
 import ru.dimorinny.floatingtextbutton.FloatingTextButton
 
-class ItemFragment: Fragment() {
+class ItemFragment: BaseFragment() {
 
     // Category
     private var catCur: Int = -1
@@ -86,6 +85,15 @@ class ItemFragment: Fragment() {
         }
 
         return rootView
+    }
+
+    override fun onBackPressed(): Boolean {
+        if (addNew) {
+            showNewAdd(false)
+            return true
+        }
+
+        return false
     }
 
     fun showNewAdd(en: Boolean) {

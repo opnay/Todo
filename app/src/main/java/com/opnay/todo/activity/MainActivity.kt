@@ -91,11 +91,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (fragment.addNew) {
-            fragment.showNewAdd(false)
-        } else {
+        if (!fragment.onBackPressed())
             super.onBackPressed()
-        }
     }
 
     override fun onConfigurationChanged(newConfig: Configuration?) {
