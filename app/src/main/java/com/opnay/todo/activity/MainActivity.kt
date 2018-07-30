@@ -14,7 +14,6 @@ import com.opnay.todo.R
 import com.opnay.todo.fragment.ItemFragment
 import com.opnay.todo.preference.TodoPreference
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity() {
     private val toggle: ActionBarDrawerToggle by lazy {
