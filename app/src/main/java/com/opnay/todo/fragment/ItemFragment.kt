@@ -3,13 +3,13 @@ package com.opnay.todo.fragment
 import android.content.Context
 import android.os.Bundle
 import android.support.constraint.ConstraintLayout
-import android.support.v7.app.AlertDialog
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.*
+import android.widget.EditText
+import android.widget.ListView
 import at.markushi.ui.CircleButton
 import com.opnay.todo.R
 import com.opnay.todo.activity.MainActivity
@@ -21,39 +21,14 @@ import ru.dimorinny.floatingtextbutton.FloatingTextButton
 
 class ItemFragment: BaseFragment() {
 
-    // Category
-    private var catCur: Int = -1
-    var catManage: Boolean = false
-
     private val parent: MainActivity by lazy { activity!! as MainActivity }
     private val imm: InputMethodManager by lazy {
         parent.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     }
 
     // Adapter
-    private val categoryAdapter: ArrayAdapter<String> by lazy {
-            ArrayAdapter(parent, android.R.layout.simple_list_item_1, TodoPreference.catData)
-    }
     private val allItemsAdapter: TodoAdapter
             by lazy { TodoAdapter(parent, TodoPreference.prefData) }
-
-    // Listener
-    private val categoryLongClickListener by lazy {
-        AdapterView.OnItemLongClickListener { _, _, i, _ ->
-            AlertDialog.Builder(parent, R.style.App_Dialog).apply {
-                setTitle("Delete category?")
-                setMessage("All items which include this will delete with this.")
-                setPositiveButton("Delete") { _, _ ->
-                    TodoPreference.catData.removeAt(i)
-                    TodoPreference.savePref(parent)
-                    updateList()
-                }
-                setNegativeButton("Cancel") { _, _ -> }
-                create()
-            }.show()
-            return@OnItemLongClickListener true
-        }
-    }
 
     // Holder
     private var rootView: View? = null
@@ -133,11 +108,7 @@ class ItemFragment: BaseFragment() {
 
     fun addNewItem(): Boolean {
         etNew.text.toString().run {
-            if (catManage) {    // Add Category
-                TodoPreference.catData.add(this)
-            } else {
-                TodoPreference.prefData.add(TodoData(title = this))
-            }
+            TodoPreference.prefData.add(TodoData(this))
         }
 
         updateList()
@@ -150,26 +121,12 @@ class ItemFragment: BaseFragment() {
         return true
     }
 
-    fun updateList(manage: Boolean = catManage, state: Int = catCur) {
-        if (!manage && state != catCur) {   // Show Category
-            TodoPreference.catData[state].run {
-                lstTodo.adapter =
-                        if (state == 0) allItemsAdapter
-                        else TodoAdapter(parent,
-                                ArrayList(TodoPreference.prefData.filter { it.category == this }))
-                parent.title = this
-            }
-        } else if (manage != catManage) {   // Show Category Manage
-            lstTodo.adapter = categoryAdapter
-            lstTodo.onItemLongClickListener = categoryLongClickListener
-            parent.title = "Category Manage"
-        }
+    fun updateList() {
+        lstTodo.adapter = allItemsAdapter
+        parent.title = "All"
 
         // Refresh ListView
-        (lstTodo.adapter as BaseAdapter?)?.notifyDataSetChanged()
-        // When manage is true, catCur set as out of index
-        catCur = if (manage) TodoPreference.catData.size else state
-        catManage = manage
+        allItemsAdapter.notifyDataSetChanged()
     }
 
 }
