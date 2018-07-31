@@ -12,6 +12,7 @@ import com.opnay.todo.Util
 import com.opnay.todo.activity.ModifyActivity
 import com.opnay.todo.app.DetailDialog
 import com.opnay.todo.data.TodoData
+import com.opnay.todo.preference.TodoPreference
 import kotlinx.android.synthetic.main.list_todo.view.*
 
 class TodoAdapter(private val context: Context, val data: ArrayList<TodoData>)
@@ -39,6 +40,9 @@ class TodoAdapter(private val context: Context, val data: ArrayList<TodoData>)
             with((it.parent as View).tag as ViewHolder) {
                 data[position].toggle(chk.isChecked)
                 toggleStrike(tv, chk.isChecked)
+
+                // Save Checkbox
+                TodoPreference.savePref(context)
             }
         }
         return view
