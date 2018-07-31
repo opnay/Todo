@@ -43,9 +43,9 @@ class TodoAdapter(private val context: Context, val data: ArrayList<TodoData>)
         }
     }
 
-    inner class ViewHolder(val view: View) {
-        val tv = view.todo_text!!
-        val chk = view.todo_check!!
+    inner class ViewHolder(private val view: View) {
+        private val tv = view.todo_text!!
+        private val chk = view.todo_check!!
 
         fun bindView(position: Int) {
             val item = data[position]
