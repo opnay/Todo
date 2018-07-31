@@ -24,7 +24,6 @@ class ItemFragment: BaseFragment() {
     // Category
     private var catCur: Int = -1
     var catManage: Boolean = false
-    var addNew: Boolean = false
 
     private val parent: MainActivity by lazy { activity!! as MainActivity }
     private val imm: InputMethodManager by lazy {
@@ -64,13 +63,49 @@ class ItemFragment: BaseFragment() {
     private val btnNew: CircleButton by lazy { rootView!!.new_btn as CircleButton }
     private val etNew: EditText by lazy { rootView!!.new_title as EditText }
 
+    /*
+     * Item Fragment Mode
+     *
+     * @DEFAULT Show only list
+     * @ADD     Show input with list
+     * @MULTI   Selectable List (Will)
+     */
+    enum class Mode {
+        DEFAULT,
+        ADD,
+        MULTI   // Will be add
+    }
+
+    private var mode: Mode = Mode.DEFAULT
+        set(value) {
+            // Check already
+            if (field == value)
+                return
+
+            // Change mode
+            when (value) {
+                Mode.DEFAULT -> {
+                    layNew.visibility = View.GONE
+                    fabAdd.visibility = View.VISIBLE
+                }
+                Mode.ADD -> {
+                    layNew.visibility = View.VISIBLE
+                    fabAdd.visibility = View.GONE
+                }
+                Mode.MULTI -> {} // unused
+            }
+
+            // Replace value
+            field = value
+        }
+
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_item_list, container, false)
 
         fabAdd.setOnClickListener {
-            showNewAdd(true)
+            mode = Mode.ADD
             etNew.requestFocus()
             imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 1)
         }
@@ -88,23 +123,12 @@ class ItemFragment: BaseFragment() {
     }
 
     override fun onBackPressed(): Boolean {
-        if (addNew) {
-            showNewAdd(false)
+        if (mode != Mode.DEFAULT) {
+            mode = Mode.DEFAULT
             return true
         }
 
         return false
-    }
-
-    fun showNewAdd(en: Boolean) {
-        addNew = en
-        if (en) {
-            layNew.visibility = View.VISIBLE
-            fabAdd.visibility = View.GONE
-        } else {
-            layNew.visibility = View.GONE
-            fabAdd.visibility = View.VISIBLE
-        }
     }
 
     fun addNewItem(): Boolean {
@@ -121,7 +145,7 @@ class ItemFragment: BaseFragment() {
         TodoPreference.savePref(parent)
 
         etNew.text.clear()
-        showNewAdd(false)
+        mode = Mode.DEFAULT
         imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
         return true
     }
