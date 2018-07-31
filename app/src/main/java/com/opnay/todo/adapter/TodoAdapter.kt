@@ -26,25 +26,8 @@ class TodoAdapter(private val context: Context, val data: ArrayList<TodoData>)
         view = convertView ?: inflater.inflate(layout, null)
         holder = (view.tag as ViewHolder?) ?: ViewHolder(view).also { view.tag = it }
 
-        holder.bindView(data[position])
+        holder.bindView(position)
 
-        view.apply {
-            setOnClickListener { DetailDialog(context, data[position]).show() }
-            setOnLongClickListener {
-                Util.startActivity(context, ModifyActivity::class.java,
-                        hashMapOf("INDEX" to Util.UtilData(position)))
-                true
-            }
-        }
-        holder.chk.setOnClickListener {
-            with((it.parent as View).tag as ViewHolder) {
-                data[position].toggle(chk.isChecked)
-                toggleStrike(tv, chk.isChecked)
-
-                // Save Checkbox
-                TodoPreference.savePref(context)
-            }
-        }
         return view
     }
 
@@ -63,11 +46,34 @@ class TodoAdapter(private val context: Context, val data: ArrayList<TodoData>)
     inner class ViewHolder(val view: View) {
         val tv = view.todo_text!!
         val chk = view.todo_check!!
-        fun bindView(item: TodoData) {
-            item.run {
-                tv.text = title
-                chk.isChecked = check
-                toggleStrike(tv, check)
+
+        fun bindView(position: Int) {
+            val item = data[position]
+
+            // TextView
+            tv.text = item.title
+
+            // Checkbox
+            chk.apply {
+                isChecked = item.check
+                toggleStrike(tv, item.check)
+                setOnClickListener {
+                    item.toggle(chk.isChecked)
+                    toggleStrike(tv, chk.isChecked)
+
+                    // Save Checkbox
+                    TodoPreference.savePref(context)
+                }
+            }
+
+            // List item listener
+            view.apply {
+                setOnClickListener { DetailDialog(context, item).show() }
+                setOnLongClickListener {
+                    Util.startActivity(context, ModifyActivity::class.java,
+                            hashMapOf("INDEX" to Util.UtilData(position)))
+                    true
+                }
             }
         }
     }
