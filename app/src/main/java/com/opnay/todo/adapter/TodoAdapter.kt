@@ -22,14 +22,8 @@ class TodoAdapter(private val context: Context, val data: ArrayList<TodoData>)
     private val inflater: LayoutInflater by lazy { LayoutInflater.from(context) }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        if (convertView == null) {
-            view = inflater.inflate(layout, null)
-            holder = ViewHolder(view)
-            view.tag = holder
-        } else {
-            view = convertView
-            holder = view.tag as ViewHolder
-        }
+        view = convertView ?: inflater.inflate(layout, null)
+        holder = (view.tag as ViewHolder?) ?: ViewHolder(view).also { view.tag = it }
 
         holder.bindView(data[position])
 
