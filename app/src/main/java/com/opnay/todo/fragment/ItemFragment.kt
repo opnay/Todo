@@ -170,9 +170,6 @@ class ItemFragment: BaseFragment() {
         // When manage is true, catCur set as out of index
         catCur = if (manage) TodoPreference.catData.size else state
         catManage = manage
-
-        // After this, update category
-        parent.updateCategory(catCur)
     }
 
 }
