@@ -1,12 +1,10 @@
 package com.opnay.todo.adapter
 
 import android.content.Context
-import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import android.widget.TextView
 import com.opnay.todo.R
 import com.opnay.todo.Util
 import com.opnay.todo.activity.ModifyActivity
@@ -35,35 +33,41 @@ class TodoAdapter(private val context: Context, val data: ArrayList<TodoData>)
     override fun getItemId(position: Int): Long = 0
     override fun getCount(): Int = data.size
 
-    private fun toggleStrike(tv: TextView, en: Boolean = false) {
-        tv.apply {
-            paintFlags =
-                    if(en) paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-                    else paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
-        }
-    }
-
     inner class ViewHolder(private val view: View) {
+        // View
         private val tv = view.todo_text!!
         private val chk = view.todo_check!!
+
+        // Settings
+
+        /*
+         * @true    Checked / TextDisable
+         * @false   Unchecked
+         */
+        private var isChecked: Boolean = true
+            set(value) {
+                field = value
+                chk.isChecked = value
+                tv.isEnabled = !value   // Toggle TextColor
+            }
 
         fun bindView(position: Int) {
             val item = data[position]
 
-            // TextView
-            tv.text = item.title
+            // Data Initial
+            item.run {
+                tv.text = title
+                isChecked = check
+            }
 
             // Checkbox
-            chk.apply {
+            chk.setOnClickListener {
+                // Update View as checked
+                item.toggle(chk.isChecked)
                 isChecked = item.check
-                toggleStrike(tv, item.check)
-                setOnClickListener {
-                    item.toggle(chk.isChecked)
-                    toggleStrike(tv, chk.isChecked)
 
-                    // Save Checkbox
-                    TodoPreference.savePref(context)
-                }
+                // Save Checkbox
+                TodoPreference.savePref(context)
             }
 
             // List item listener
