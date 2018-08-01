@@ -1,10 +1,10 @@
 package com.opnay.todo.adapter
 
 import android.content.Context
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import com.opnay.todo.R
 import com.opnay.todo.Util
 import com.opnay.todo.activity.ModifyActivity
@@ -14,51 +14,23 @@ import com.opnay.todo.preference.TodoPreference
 import kotlinx.android.synthetic.main.list_todo.view.*
 
 class TodoAdapter(private val context: Context, val data: ArrayList<TodoData>)
-    : BaseAdapter() {
+    : RecyclerView.Adapter<TodoAdapter.ViewHolder>() {
     private val layout = R.layout.list_todo
-    private lateinit var holder: ViewHolder
-    private lateinit var view: View
     private val inflater: LayoutInflater by lazy { LayoutInflater.from(context) }
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        view = convertView ?: inflater.inflate(layout, null)
-        holder = (view.tag as ViewHolder?) ?: ViewHolder(view).also { view.tag = it }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = inflater.inflate(layout, parent, false)
 
-        holder.bindView(position)
-
-        return view
+        return ViewHolder(view)
     }
 
-    override fun getItem(position: Int): Any = data[position]
-    override fun getItemId(position: Int): Long = 0
-    override fun getCount(): Int = data.size
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val item = data[position]
 
-    inner class ViewHolder(private val view: View) {
-        // View
-        private val tv = view.todo_text!!
-        private val chk = view.todo_check!!
-
-        // Settings
-
-        /*
-         * @true    Checked / TextDisable
-         * @false   Unchecked
-         */
-        private var isChecked: Boolean = true
-            set(value) {
-                field = value
-                chk.isChecked = value
-                tv.isEnabled = !value   // Toggle TextColor
-            }
-
-        fun bindView(position: Int) {
-            val item = data[position]
-
-            // Data Initial
-            item.run {
-                tv.text = title
-                isChecked = check
-            }
+        // Data Initial
+        holder.apply {
+            tv.text = item.title
+            isChecked = item.check
 
             // Checkbox
             chk.setOnClickListener {
@@ -70,7 +42,6 @@ class TodoAdapter(private val context: Context, val data: ArrayList<TodoData>)
                 TodoPreference.savePref(context)
             }
 
-            // List item listener
             view.apply {
                 setOnClickListener { DetailDialog(context, item).show() }
                 setOnLongClickListener {
@@ -80,6 +51,25 @@ class TodoAdapter(private val context: Context, val data: ArrayList<TodoData>)
                 }
             }
         }
+    }
+
+    override fun getItemCount(): Int = data.size
+
+    inner class ViewHolder(val view: View): RecyclerView.ViewHolder(view) {
+        // View
+        val tv = view.todo_text!!
+        val chk = view.todo_check!!
+
+        /*
+         * @true    Checked / TextDisable
+         * @false   Unchecked
+         */
+        var isChecked: Boolean = true
+            set(value) {
+                field = value
+                chk.isChecked = value
+                tv.isEnabled = !value   // Toggle TextColor
+            }
     }
 
 }

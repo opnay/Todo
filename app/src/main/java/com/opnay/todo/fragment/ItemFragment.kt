@@ -3,13 +3,14 @@ package com.opnay.todo.fragment
 import android.content.Context
 import android.os.Bundle
 import android.support.constraint.ConstraintLayout
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import android.widget.ListView
 import at.markushi.ui.CircleButton
 import com.opnay.todo.R
 import com.opnay.todo.activity.MainActivity
@@ -29,10 +30,11 @@ class ItemFragment: BaseFragment() {
     // Adapter
     private val allItemsAdapter: TodoAdapter
             by lazy { TodoAdapter(parent, TodoPreference.prefData) }
+    private val viewManager: LinearLayoutManager by lazy { LinearLayoutManager(parent) }
 
     // Holder
     private var rootView: View? = null
-    private val lstTodo: ListView by lazy { rootView!!.main_list as ListView }
+    private val lstTodo: RecyclerView by lazy { rootView!!.main_list as RecyclerView }
     private val fabAdd: FloatingTextButton by lazy { rootView!!.fab_btn_add as FloatingTextButton }
     private val layNew: ConstraintLayout by lazy { rootView!!.new_item as ConstraintLayout }
     private val btnNew: CircleButton by lazy { rootView!!.new_btn as CircleButton }
@@ -94,6 +96,9 @@ class ItemFragment: BaseFragment() {
             return@setOnKeyListener false
         }
 
+        lstTodo.adapter = allItemsAdapter
+        lstTodo.layoutManager = viewManager
+
         return rootView
     }
 
@@ -112,7 +117,7 @@ class ItemFragment: BaseFragment() {
         }
 
         updateList()
-        lstTodo.smoothScrollByOffset(lstTodo.bottom)
+        lstTodo.smoothScrollToPosition(lstTodo.bottom)
         TodoPreference.savePref(parent)
 
         etNew.text.clear()
@@ -121,12 +126,5 @@ class ItemFragment: BaseFragment() {
         return true
     }
 
-    fun updateList() {
-        lstTodo.adapter = allItemsAdapter
-        parent.title = "All"
-
-        // Refresh ListView
-        allItemsAdapter.notifyDataSetChanged()
-    }
-
+    fun updateList() { allItemsAdapter.notifyDataSetChanged() }
 }

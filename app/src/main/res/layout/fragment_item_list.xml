@@ -9,7 +9,7 @@
     tools:context=".fragment.ItemFragment"
     tools:listitem="@layout/list_todo">
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/main_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
