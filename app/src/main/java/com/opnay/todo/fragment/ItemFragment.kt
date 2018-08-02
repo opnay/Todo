@@ -116,7 +116,7 @@ class ItemFragment: BaseFragment() {
             TodoPreference.prefData.add(TodoData(this))
         }
 
-        updateList()
+        updateData()
         lstTodo.smoothScrollToPosition(lstTodo.bottom)
         TodoPreference.savePref(parent)
 
@@ -126,5 +126,5 @@ class ItemFragment: BaseFragment() {
         return true
     }
 
-    fun updateList() { allItemsAdapter.notifyDataSetChanged() }
+    override fun updateData() { allItemsAdapter.notifyDataSetChanged() }
 }

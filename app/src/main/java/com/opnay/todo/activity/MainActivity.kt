@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         // For Initial
-        fragment.updateList()
+        fragment.updateData()
     }
 
     override fun onBackPressed() {
