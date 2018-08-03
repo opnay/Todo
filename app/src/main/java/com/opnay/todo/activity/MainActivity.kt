@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment, fragment)
+                .replace(R.id.main_fragment, fragment)
                 .commit()
 
         TodoPreference.loadPref(this)
