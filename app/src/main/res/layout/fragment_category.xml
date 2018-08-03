@@ -39,7 +39,7 @@
             android:textSize="@dimen/cat_fragment_progress_title" />
 
         <ProgressBar
-            android:id="@+id/completeBar"
+            android:id="@+id/progressBar"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
