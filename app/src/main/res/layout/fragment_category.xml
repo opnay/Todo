@@ -15,35 +15,21 @@
         android:text="@string/cat_fragment_title"
         android:textColor="@color/blackText"
         android:textSize="@dimen/cat_fragment_title"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintBottom_toTopOf="@+id/progress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <com.opnay.todo.view.ProgressText
+        android:id="@+id/progress"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/cat_fragment_line_margin"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:orientation="vertical"
+        android:text="@string/cat_fragment_complete"
         app:layout_constraintBottom_toTopOf="@+id/categoryList"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/cat_fragment_complete"
-            android:textColor="@color/blackTextSecondary"
-            android:textSize="@dimen/cat_fragment_progress_title" />
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/categoryList"
