@@ -21,7 +21,6 @@ class CategoryFragment: BaseFragment() {
     // holder
     private var rootView: View? = null
     private val list: RecyclerView by lazy { rootView!!.categoryList }
-    private val prgComplete: ProgressText by lazy { rootView!!.progress }
 
     // Adapter
     private val adapter: TempAdapter by lazy { TempAdapter(parent) }
@@ -36,8 +35,6 @@ class CategoryFragment: BaseFragment() {
 
         list.adapter = adapter
         list.layoutManager = viewManager
-
-        prgComplete.progressBar.progress = 10
 
         return rootView
     }
