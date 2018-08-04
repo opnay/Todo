@@ -14,6 +14,9 @@
 
     <dimen name="cat_fragment_line_margin">16dp</dimen>
 
+    <dimen name="cat_card_margin">24dp</dimen>
+    <dimen name="cat_card_title">18sp</dimen>
+
     <!-- Dialog -->
     <dimen name="dialog_margin">18dp</dimen>
     <dimen name="dialog_title_margin">4dp</dimen>
