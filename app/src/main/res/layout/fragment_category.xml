@@ -6,10 +6,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".fragment.CategoryFragment">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/categoryList"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/categoryPager"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="320dp"
         android:minHeight="320dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
