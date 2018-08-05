@@ -11,6 +11,8 @@
         android:layout_width="0dp"
         android:layout_height="320dp"
         android:minHeight="320dp"
+        android:padding="64dp"
+        android:clipToPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
