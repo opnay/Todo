@@ -23,6 +23,7 @@ class CategoryFragment: BaseFragment() {
                               savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_category, container, false)
 
+        pagerCategory.offscreenPageLimit = 5
         pagerCategory.adapter = CategoryAdapter(parent, fragmentManager!!)
 
         return rootView
