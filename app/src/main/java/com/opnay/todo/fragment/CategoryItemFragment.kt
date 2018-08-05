@@ -23,8 +23,10 @@ class CategoryItemFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.list_category, container, false)
 
-        TodoPreference.catData[position].run {
-            tvTitle.text = this
+        if (position >= 0) {
+            TodoPreference.catData[position].run {
+                tvTitle.text = this
+            }
         }
 
         return rootView
