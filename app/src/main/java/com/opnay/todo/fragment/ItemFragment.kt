@@ -13,7 +13,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import at.markushi.ui.CircleButton
 import com.opnay.todo.R
-import com.opnay.todo.activity.MainActivity
+import com.opnay.todo.activity.BaseActivity
 import com.opnay.todo.adapter.TodoAdapter
 import com.opnay.todo.data.TodoData
 import com.opnay.todo.preference.TodoPreference
@@ -22,7 +22,7 @@ import ru.dimorinny.floatingtextbutton.FloatingTextButton
 
 class ItemFragment: BaseFragment() {
 
-    private val parent: MainActivity by lazy { activity!! as MainActivity }
+    private val parent: BaseActivity by lazy { activity!! as BaseActivity }
     private val imm: InputMethodManager by lazy {
         parent.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     }
