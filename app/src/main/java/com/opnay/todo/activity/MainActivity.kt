@@ -15,12 +15,6 @@ class MainActivity : BaseActivity() {
     private val rootView: LinearLayout by lazy { rootLayout }
     private val toolBar: Toolbar by lazy { toolbar }
 
-    var title: String
-        get() = actionBar.title as String
-        set(value) {
-            actionBar.title = value
-        }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_with_fragment)
