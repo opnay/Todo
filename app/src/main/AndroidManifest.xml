@@ -18,6 +18,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.ItemActivity" />
         <activity
             android:name=".activity.ModifyActivity"
             android:label="@string/title_activity_modify"
