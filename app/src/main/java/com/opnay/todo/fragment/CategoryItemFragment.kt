@@ -18,7 +18,9 @@ class CategoryItemFragment: Fragment() {
     private val tvTitle: TextView by lazy { rootView!!.title }
     private val prgComplete: ProgressText by lazy { rootView!!.complete }
 
-    var position: Int = -1
+    var position: Int = 0
+    private val category: String
+        get() = TodoPreference.catData[position]
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.list_category, container, false)
