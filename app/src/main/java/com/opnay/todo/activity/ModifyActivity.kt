@@ -9,15 +9,12 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import com.opnay.todo.R
-import com.opnay.todo.Util
 import com.opnay.todo.data.TodoData
 import com.opnay.todo.preference.TodoPreference
 import kotlinx.android.synthetic.main.activity_modify.*
 
 class ModifyActivity : AppCompatActivity() {
-    private val dataIndex: Int by lazy {
-        (intent.getSerializableExtra("INDEX") as Util.UtilData<*>).data as Int
-    }
+    private val dataIndex: Int by lazy { intent.getSerializableExtra("INDEX") as Int }
     private val data: TodoData by lazy { TodoPreference.prefData[dataIndex] }
 
     private val spinAdapter by lazy {

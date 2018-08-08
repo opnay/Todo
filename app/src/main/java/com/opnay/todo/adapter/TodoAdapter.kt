@@ -46,7 +46,7 @@ class TodoAdapter(private val context: Context, val data: ArrayList<TodoData>)
                 setOnClickListener { DetailDialog(context, item).show() }
                 setOnLongClickListener {
                     Util.startActivity(context, ModifyActivity::class.java,
-                            hashMapOf("INDEX" to Util.UtilData(position)))
+                            hashMapOf("INDEX" to position))
                     true
                 }
             }

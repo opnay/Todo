@@ -14,6 +14,4 @@ class Util {
             }
         }
     }
-
-    class UtilData<T>(var data: T): Serializable
 }
