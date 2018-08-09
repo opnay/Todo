@@ -32,11 +32,7 @@ class CategoryItemFragment: Fragment() {
             }
         }
 
-        if (position >= 0) {
-            TodoPreference.catData[position].run {
-                tvTitle.text = this
-            }
-        }
+        tvTitle.text = category
 
         return rootView
     }
