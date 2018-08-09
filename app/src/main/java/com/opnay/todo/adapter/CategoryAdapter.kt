@@ -11,7 +11,7 @@ import com.opnay.todo.preference.TodoPreference
 class CategoryAdapter(val context: Context, fm: FragmentManager): FragmentStatePagerAdapter(fm) {
     override fun getItem(pos: Int): Fragment {
         return if (pos >= TodoPreference.catData.size)
-            CategoryAddFragment()
+            CategoryAddFragment().apply { adapter = this@CategoryAdapter }
         else
             CategoryItemFragment().apply { position = pos }
     }
