@@ -32,8 +32,6 @@ class MainActivity : BaseActivity() {
         supportFragmentManager.beginTransaction()
                 .replace(R.id.fragmentFrame, fragment)
                 .commit()
-
-        TodoPreference.loadPref(this)
     }
 
 }
