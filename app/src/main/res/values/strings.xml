@@ -20,6 +20,7 @@
     <!-- Category Fragment -->
     <string name="cat_fragment_title">Category</string>
     <string name="cat_fragment_complete">Complete</string>
+    <string name="cat_fragment_add">New Category</string>
 
     <!-- Dialog -->
     <string name="dialog_desc">Description</string>
