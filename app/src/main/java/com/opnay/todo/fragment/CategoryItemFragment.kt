@@ -36,4 +36,6 @@ class CategoryItemFragment: Fragment() {
 
         return rootView
     }
+
+    fun isChanged(): Boolean = (tvTitle.text != category)
 }
