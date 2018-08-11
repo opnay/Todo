@@ -2,6 +2,8 @@ package com.opnay.todo.data
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.opnay.todo.toBoolean
+import com.opnay.todo.toByte
 
 class TodoData(var title: String = "") : Parcelable {
     var category: String = ""
@@ -15,14 +17,14 @@ class TodoData(var title: String = "") : Parcelable {
     constructor(parcel: Parcel) : this(parcel.readString()) {
         category = parcel.readString()
         desc = parcel.readString()
-        check = parcel.readByte() != 0.toByte()
+        check = parcel.readByte().toBoolean()
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(title)
         parcel.writeString(category)
         parcel.writeString(desc)
-        parcel.writeByte(if (check) 1 else 0)
+        parcel.writeByte(check.toByte())
     }
 
     override fun describeContents(): Int = 0

@@ -2,7 +2,6 @@ package com.opnay.todo
 
 import android.content.Context
 import android.content.Intent
-import android.os.Parcel
 import android.os.Parcelable
 import java.io.Serializable
 
@@ -22,3 +21,9 @@ class Util {
         }
     }
 }
+
+fun Boolean.toInt(): Int = if (this) 1 else 0
+fun Int.toBoolean(): Boolean = (this != 0)
+
+fun Boolean.toByte(): Byte = if (this) 1 else 0
+fun Byte.toBoolean(): Boolean = (this != 0.toByte())
