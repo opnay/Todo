@@ -22,6 +22,9 @@ class Util {
     }
 }
 
+fun Boolean.toLong(): Long = if (this) 1 else 0
+fun Long.toBoolean(): Boolean = (this != 0L)
+
 fun Boolean.toInt(): Int = if (this) 1 else 0
 fun Int.toBoolean(): Boolean = (this != 0)
 
