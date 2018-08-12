@@ -51,6 +51,10 @@ class ItemDatabaseHelper(ctx: Context):
         }
     }
 
+    fun deleteCategory(id: Int): Int = use {
+        delete(TABLE_CAT, "$ATTR_ID = {itemID}", "itemID" to id)
+    }
+
     override fun onCreate(db: SQLiteDatabase) {
         db.createTable(TABLE_ITEM, true,
                 ATTR_ID to INTEGER + PRIMARY_KEY + UNIQUE,
