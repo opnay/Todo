@@ -17,6 +17,7 @@ import com.opnay.todo.Util.Companion.KEY_CATEGORY
 import com.opnay.todo.activity.BaseActivity
 import com.opnay.todo.adapter.TodoAdapter
 import com.opnay.todo.data.Category
+import com.opnay.todo.data.TodoData
 import com.opnay.todo.sqlite.db
 import kotlinx.android.synthetic.main.fragment_item_list.view.*
 import ru.dimorinny.floatingtextbutton.FloatingTextButton
@@ -29,9 +30,12 @@ class ItemFragment: BaseFragment() {
     }
 
     private val category: Category by lazy { arguments!!.getParcelable(KEY_CATEGORY) as Category }
+    private val items: ArrayList<TodoData> by lazy {
+        ArrayList(parent.db.items.filter { it.category == category.id })
+    }
 
     // Adapter
-    private val allItemsAdapter: TodoAdapter by lazy { TodoAdapter(parent, category) }
+    private val allItemsAdapter: TodoAdapter by lazy { TodoAdapter(parent, items) }
     private val viewManager: LinearLayoutManager by lazy { LinearLayoutManager(parent) }
 
     // Holder
@@ -129,5 +133,9 @@ class ItemFragment: BaseFragment() {
         return true
     }
 
-    override fun updateData() { allItemsAdapter.notifyDataSetChanged() }
+    override fun updateData() {
+        items.clear()
+        items.addAll(parent.db.items)
+        allItemsAdapter.notifyDataSetChanged()
+    }
 }
