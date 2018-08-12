@@ -38,6 +38,19 @@ class ItemDatabaseHelper(ctx: Context):
         }
     }
 
+    val category: List<String>
+        get() = use {
+            select(TABLE_CAT, ATTR_TITLE)
+                    .parseList(StringParser)
+        }
+
+    fun insertCategory(title: String) {
+        use {
+            insert(ItemDatabaseHelper.TABLE_CAT,
+                    ItemDatabaseHelper.ATTR_TITLE to title)
+        }
+    }
+
     override fun onCreate(db: SQLiteDatabase) {
         db.createTable(TABLE_ITEM, true,
                 ATTR_ID to INTEGER + PRIMARY_KEY + UNIQUE,
