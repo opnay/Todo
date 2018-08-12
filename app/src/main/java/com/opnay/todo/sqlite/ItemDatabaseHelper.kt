@@ -55,6 +55,33 @@ class ItemDatabaseHelper(ctx: Context):
         delete(TABLE_CAT, "$ATTR_ID = {itemID}", "itemID" to id)
     }
 
+    val items: List<TodoData>
+        get() = use {
+            select(TABLE_ITEM, ATTR_ID, ATTR_TITLE, ATTR_CATEGORY, ATTR_DESC, ATTR_COMPLETE)
+                    .parseList(TodoParser)
+        }
+
+    fun insertItem(title: String, category: Int) {
+        use {
+            insert(TABLE_ITEM,
+                    ATTR_TITLE to title,
+                    ATTR_CATEGORY to category)
+        }
+    }
+
+    fun updateItem(id: Int, title: String, desc: String, complete: Int) {
+        use {
+            update(TABLE_ITEM,
+                    ATTR_TITLE to title, ATTR_DESC to desc, ATTR_COMPLETE to complete)
+                    .whereArgs("$ATTR_ID = {itemID}", "itemID" to id)
+                    .exec()
+        }
+    }
+
+    fun deleteItem(id: Int): Int = use {
+        delete(TABLE_ITEM, "$ATTR_ID = {itemID}", "itemID" to id)
+    }
+
     override fun onCreate(db: SQLiteDatabase) {
         db.createTable(TABLE_ITEM, true,
                 ATTR_ID to INTEGER + PRIMARY_KEY + UNIQUE,
