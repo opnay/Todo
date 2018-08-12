@@ -2,6 +2,7 @@ package com.opnay.todo.sqlite
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
+import com.opnay.todo.data.Category
 import com.opnay.todo.data.TodoData
 import com.opnay.todo.toBoolean
 import com.opnay.todo.toInt
@@ -37,12 +38,18 @@ class ItemDatabaseHelper(ctx: Context):
                             (columns.getValue(ATTR_DESC) as String),
                             (columns.getValue(ATTR_COMPLETE) as Long).toBoolean())
         }
+
+        val CategoryParser: MapRowParser<Category> = object: MapRowParser<Category> {
+            override fun parseRow(columns: Map<String, Any?>): Category =
+                    Category((columns.getValue(ATTR_ID) as Long).toInt(),
+                            columns.getValue(ATTR_TITLE) as String)
+        }
     }
 
-    val category: List<String>
+    val category: List<Category>
         get() = use {
-            select(TABLE_CAT, ATTR_TITLE)
-                    .parseList(StringParser)
+            select(TABLE_CAT, ATTR_ID, ATTR_TITLE)
+                    .parseList(CategoryParser)
         }
 
     fun insertCategory(title: String) {

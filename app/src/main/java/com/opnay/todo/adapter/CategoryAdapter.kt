@@ -1,24 +1,28 @@
 package com.opnay.todo.adapter
 
 import android.content.Context
+import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v4.view.PagerAdapter
+import com.opnay.todo.Util
+import com.opnay.todo.data.Category
 import com.opnay.todo.fragment.CategoryAddFragment
 import com.opnay.todo.fragment.CategoryItemFragment
 import com.opnay.todo.sqlite.db
 
 class CategoryAdapter(val context: Context, fm: FragmentManager): FragmentStatePagerAdapter(fm) {
-    val data: ArrayList<String> by lazy { ArrayList<String>(context.db.category) }
+    val data: ArrayList<Category> by lazy { ArrayList<Category>(context.db.category) }
 
     override fun getItem(pos: Int): Fragment {
         return if (pos >= data.size)
             CategoryAddFragment().apply { adapter = this@CategoryAdapter }
         else
             CategoryItemFragment().apply {
-                position = pos
-                category = data[pos]
+                arguments = Bundle().also {
+                    it.putParcelable(Util.KEY_CATEGORY, data[pos])
+                }
             }
     }
 
