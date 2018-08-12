@@ -13,10 +13,10 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import at.markushi.ui.CircleButton
 import com.opnay.todo.R
+import com.opnay.todo.Util.Companion.KEY_CATEGORY
 import com.opnay.todo.activity.BaseActivity
 import com.opnay.todo.adapter.TodoAdapter
-import com.opnay.todo.data.TodoData
-import com.opnay.todo.preference.TodoPreference
+import com.opnay.todo.sqlite.db
 import kotlinx.android.synthetic.main.fragment_item_list.view.*
 import ru.dimorinny.floatingtextbutton.FloatingTextButton
 
@@ -27,9 +27,11 @@ class ItemFragment: BaseFragment() {
         parent.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     }
 
+    private val category: String by lazy { arguments!!.getString(KEY_CATEGORY) }
+    private val categoryIdx: Int by lazy { parent.db.category.indexOf(category) }
+
     // Adapter
-    private val allItemsAdapter: TodoAdapter
-            by lazy { TodoAdapter(parent, TodoPreference.prefData) }
+    private val allItemsAdapter: TodoAdapter by lazy { TodoAdapter(parent, category, categoryIdx) }
     private val viewManager: LinearLayoutManager by lazy { LinearLayoutManager(parent) }
 
     // Holder
@@ -112,17 +114,18 @@ class ItemFragment: BaseFragment() {
     }
 
     fun addNewItem(): Boolean {
-        etNew.text.toString().run {
-            TodoPreference.prefData.add(TodoData(0, this))
-        }
+        // Insert New Item
+        parent.db.insertItem(etNew.text.toString(), categoryIdx)
 
+        // Notify data was changed
         updateData()
         lstTodo.smoothScrollToPosition(lstTodo.bottom)
-        TodoPreference.savePref(parent)
 
+        // Clear Input
         etNew.text.clear()
         mode = Mode.DEFAULT
         imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
+
         return true
     }
 

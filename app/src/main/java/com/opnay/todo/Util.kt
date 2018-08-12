@@ -7,6 +7,8 @@ import java.io.Serializable
 
 class Util {
     companion object {
+        const val KEY_CATEGORY = "CATEGORY"
+
         fun startActivity(ctx: Context, cls: Class<*>) { startActivity(ctx, cls, null) }
         fun startActivity(context: Context, cls: Class<*>, extra: HashMap<String, *>?) {
             Intent(context, cls).run {

@@ -5,18 +5,21 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import com.opnay.todo.R
-import com.opnay.todo.Util
-import com.opnay.todo.activity.ModifyActivity
 import com.opnay.todo.app.DetailDialog
 import com.opnay.todo.data.TodoData
-import com.opnay.todo.preference.TodoPreference
+import com.opnay.todo.sqlite.db
 import kotlinx.android.synthetic.main.list_todo.view.*
 
-class TodoAdapter(private val context: Context, val data: ArrayList<TodoData>)
+class TodoAdapter(private val context: Context, val category: String, val categoryIdx: Int)
     : RecyclerView.Adapter<TodoAdapter.ViewHolder>() {
     private val layout = R.layout.list_todo
     private val inflater: LayoutInflater by lazy { LayoutInflater.from(context) }
+
+    private val data: ArrayList<TodoData> by lazy {
+        ArrayList(context.db.items.filter { it.category == categoryIdx })
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = inflater.inflate(layout, parent, false)
@@ -34,19 +37,16 @@ class TodoAdapter(private val context: Context, val data: ArrayList<TodoData>)
 
             // Checkbox
             chk.setOnClickListener {
-                // Update View as checked
-                item.toggle(chk.isChecked)
-                isChecked = item.check
-
-                // Save Checkbox
-                TodoPreference.savePref(context)
+                item.apply {
+                    check != (it as CheckBox).isChecked
+                }.update(context)
             }
 
             view.apply {
                 setOnClickListener { DetailDialog(context, item).show() }
                 setOnLongClickListener {
-                    Util.startActivity(context, ModifyActivity::class.java,
-                            hashMapOf("INDEX" to position))
+//                    Util.startActivity(context, ModifyActivity::class.java,
+//                            hashMapOf("INDEX" to position))
                     true
                 }
             }

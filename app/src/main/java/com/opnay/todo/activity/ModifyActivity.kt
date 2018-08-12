@@ -17,16 +17,16 @@ class ModifyActivity : AppCompatActivity() {
     private val dataIndex: Int by lazy { intent.getSerializableExtra("INDEX") as Int }
     private val data: TodoData by lazy { TodoPreference.prefData[dataIndex] }
 
-    private val spinAdapter by lazy {
-        ArrayAdapter<String>(this, R.layout.category_spinner_checked)
-                .apply {
-                    setDropDownViewResource(R.layout.category_spinner)
-                    addAll(TodoPreference.catData)
-                }
-    }
+//    private val spinAdapter by lazy {
+//        ArrayAdapter<String>(this, R.layout.category_spinner_checked)
+//                .apply {
+//                    setDropDownViewResource(R.layout.category_spinner)
+//                    addAll(TodoPreference.catData)
+//                }
+//    }
 
     // View Holder
-    private val spinCategory: Spinner by lazy { spin_category as Spinner }
+//    private val spinCategory: Spinner by lazy { spin_category as Spinner }
     private val tvTitle: EditText by lazy { edit_title }
     private val tvDesc: TextInputEditText by lazy { edit_desc.editText as TextInputEditText }
     private val btnOK: Button by lazy { btn_ok }
@@ -54,15 +54,15 @@ class ModifyActivity : AppCompatActivity() {
             finish()
         }
 
-        spinCategory.adapter = spinAdapter
+//        spinCategory.adapter = spinAdapter
 
         // Load Data
         data.run {
             tvTitle.setText(title)
             tvDesc.setText(desc)
-            spinAdapter.getPosition(category).let {
-                spinCategory.setSelection(maxOf(it, 0))
-            }
+//            spinAdapter.getPosition(category).let {
+//                spinCategory.setSelection(maxOf(it, 0))
+//            }
         }
     }
 
@@ -70,7 +70,7 @@ class ModifyActivity : AppCompatActivity() {
         data.apply {
             title = tvTitle.text.toString()
             desc = tvDesc.text.toString()
-            category = spinCategory.selectedItem.toString()
+//            category = spinCategory.selectedItem.toString()
         }
         TodoPreference.savePref(this)
     }

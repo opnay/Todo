@@ -40,7 +40,7 @@ class DetailDialog(context: Context, val data: TodoData): Dialog(context, R.styl
 
             // FIXME: We have not date, It will be added.
             // Temporary use category
-            tvDate.text = if (this.category.isEmpty()) "All" else this.category
+//            tvDate.text = if (this.category.isEmpty()) "All" else this.category
 
             // Description Check
             if (this.desc.isNotEmpty())
