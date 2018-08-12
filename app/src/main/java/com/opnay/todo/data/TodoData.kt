@@ -5,22 +5,25 @@ import android.os.Parcelable
 import com.opnay.todo.toBoolean
 import com.opnay.todo.toByte
 
-class TodoData(var title: String = "") : Parcelable {
-    var category: String = ""
-    var desc: String = ""
-    var check: Boolean = false
+data class TodoData(val id: Int,
+                    var title: String = "",
+                    var category: String = "",
+                    var desc: String = "",
+                    var check: Boolean = false) : Parcelable {
 
     fun toggle(t: Boolean = !check) {
         check = t
     }
 
-    constructor(parcel: Parcel) : this(parcel.readString()) {
-        category = parcel.readString()
-        desc = parcel.readString()
-        check = parcel.readByte().toBoolean()
-    }
+    constructor(parcel: Parcel) :
+            this(parcel.readInt(),
+                    parcel.readString(),
+                    parcel.readString(),
+                    parcel.readString(),
+                    parcel.readByte().toBoolean())
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeInt(id)
         parcel.writeString(title)
         parcel.writeString(category)
         parcel.writeString(desc)
