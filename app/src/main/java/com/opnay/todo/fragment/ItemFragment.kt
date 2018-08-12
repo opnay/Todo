@@ -113,7 +113,7 @@ class ItemFragment: BaseFragment() {
 
     fun addNewItem(): Boolean {
         etNew.text.toString().run {
-            TodoPreference.prefData.add(TodoData(this))
+            TodoPreference.prefData.add(TodoData(0, this, "", ""))
         }
 
         updateData()
