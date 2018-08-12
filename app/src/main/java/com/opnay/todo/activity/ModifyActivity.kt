@@ -41,7 +41,13 @@ class ModifyActivity : AppCompatActivity() {
                         .show()
                 return@setOnClickListener
             } else {
-                saveData()
+                // Save to db
+                data.apply {
+                    title = tvTitle.text.toString()
+                    desc = tvDesc.text.toString()
+//            category = spinCategory.selectedItem.toString()
+                }.update(this)
+
                 finish()
             }
         }
@@ -63,11 +69,4 @@ class ModifyActivity : AppCompatActivity() {
         }
     }
 
-    private fun saveData() {
-        data.apply {
-            title = tvTitle.text.toString()
-            desc = tvDesc.text.toString()
-//            category = spinCategory.selectedItem.toString()
-        }.update(this)
-    }
 }
