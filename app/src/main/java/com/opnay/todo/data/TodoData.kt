@@ -7,7 +7,7 @@ import com.opnay.todo.toByte
 
 data class TodoData(val id: Int,
                     var title: String = "",
-                    var category: String = "",
+                    var category: Int = 0,
                     var desc: String = "",
                     var check: Boolean = false) : Parcelable {
 
@@ -18,14 +18,14 @@ data class TodoData(val id: Int,
     constructor(parcel: Parcel) :
             this(parcel.readInt(),
                     parcel.readString(),
-                    parcel.readString(),
+                    parcel.readInt(),
                     parcel.readString(),
                     parcel.readByte().toBoolean())
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)
         parcel.writeString(title)
-        parcel.writeString(category)
+        parcel.writeInt(category)
         parcel.writeString(desc)
         parcel.writeByte(check.toByte())
     }

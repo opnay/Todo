@@ -32,7 +32,7 @@ class ItemDatabaseHelper(ctx: Context):
             override fun parseRow(columns: Map<String, Any?>): TodoData =
                     TodoData((columns.getValue(ATTR_ID) as Long).toInt(),
                             columns.getValue(ATTR_TITLE) as String,
-                            columns.getValue(ATTR_CATEGORY) as String,
+                            (columns.getValue(ATTR_CATEGORY) as Long).toInt(),
                             columns.getValue(ATTR_DESC) as String,
                             (columns.getValue(ATTR_COMPLETE) as Long).toBoolean())
         }
@@ -55,7 +55,7 @@ class ItemDatabaseHelper(ctx: Context):
         db.createTable(TABLE_ITEM, true,
                 ATTR_ID to INTEGER + PRIMARY_KEY + UNIQUE,
                 ATTR_TITLE to TEXT,
-                ATTR_CATEGORY to TEXT,
+                ATTR_CATEGORY to INTEGER,
                 ATTR_DESC to TEXT,
                 ATTR_COMPLETE to INTEGER)
 
