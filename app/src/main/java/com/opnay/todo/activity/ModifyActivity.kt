@@ -4,18 +4,16 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.TextInputEditText
 import android.support.v7.app.AppCompatActivity
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Spinner
 import com.opnay.todo.R
+import com.opnay.todo.Util
 import com.opnay.todo.data.TodoData
-import com.opnay.todo.preference.TodoPreference
+import com.opnay.todo.sqlite.db
 import kotlinx.android.synthetic.main.activity_modify.*
 
 class ModifyActivity : AppCompatActivity() {
-    private val dataIndex: Int by lazy { intent.getSerializableExtra("INDEX") as Int }
-    private val data: TodoData by lazy { TodoPreference.prefData[dataIndex] }
+    private val data: TodoData by lazy { intent.getParcelableExtra(Util.KEY_ITEM) as TodoData }
 
 //    private val spinAdapter by lazy {
 //        ArrayAdapter<String>(this, R.layout.category_spinner_checked)
@@ -49,8 +47,7 @@ class ModifyActivity : AppCompatActivity() {
         }
 
         btnDel.setOnClickListener {
-            TodoPreference.prefData.removeAt(dataIndex)
-            TodoPreference.savePref(this@ModifyActivity)
+            db.deleteItem(data.id)
             finish()
         }
 
@@ -71,7 +68,6 @@ class ModifyActivity : AppCompatActivity() {
             title = tvTitle.text.toString()
             desc = tvDesc.text.toString()
 //            category = spinCategory.selectedItem.toString()
-        }
-        TodoPreference.savePref(this)
+        }.update(this)
     }
 }

@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import com.opnay.todo.R
+import com.opnay.todo.Util
+import com.opnay.todo.activity.ModifyActivity
 import com.opnay.todo.app.DetailDialog
 import com.opnay.todo.data.Category
 import com.opnay.todo.data.TodoData
@@ -46,8 +48,8 @@ class TodoAdapter(private val context: Context, val category: Category)
             view.apply {
                 setOnClickListener { DetailDialog(context, item).show() }
                 setOnLongClickListener {
-//                    Util.startActivity(context, ModifyActivity::class.java,
-//                            hashMapOf("INDEX" to position))
+                    Util.startActivity(context, ModifyActivity::class.java,
+                            hashMapOf(Util.KEY_ITEM to item))
                     true
                 }
             }

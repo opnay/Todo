@@ -8,6 +8,7 @@ import java.io.Serializable
 class Util {
     companion object {
         const val KEY_CATEGORY = "CATEGORY"
+        const val KEY_ITEM = "ITEM"
 
         fun startActivity(ctx: Context, cls: Class<*>) { startActivity(ctx, cls, null) }
         fun startActivity(context: Context, cls: Class<*>, extra: HashMap<String, *>?) {
