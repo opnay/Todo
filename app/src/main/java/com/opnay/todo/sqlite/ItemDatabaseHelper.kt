@@ -30,11 +30,11 @@ class ItemDatabaseHelper(ctx: Context):
 
         val TodoParser: MapRowParser<TodoData> = object: MapRowParser<TodoData> {
             override fun parseRow(columns: Map<String, Any?>): TodoData =
-                    TodoData((columns.getValue(ItemDatabaseHelper.ATTR_ID) as Long).toInt(),
-                        columns.getValue(ItemDatabaseHelper.ATTR_TITLE) as String,
-                        columns.getValue(ItemDatabaseHelper.ATTR_CATEGORY) as String,
-                        columns.getValue(ItemDatabaseHelper.ATTR_DESC) as String,
-                        (columns.getValue(ItemDatabaseHelper.ATTR_COMPLETE) as Long).toBoolean())
+                    TodoData((columns.getValue(ATTR_ID) as Long).toInt(),
+                            columns.getValue(ATTR_TITLE) as String,
+                            columns.getValue(ATTR_CATEGORY) as String,
+                            columns.getValue(ATTR_DESC) as String,
+                            (columns.getValue(ATTR_COMPLETE) as Long).toBoolean())
         }
     }
 
