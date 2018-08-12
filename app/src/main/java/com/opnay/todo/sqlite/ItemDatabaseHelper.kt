@@ -52,6 +52,14 @@ class ItemDatabaseHelper(ctx: Context):
         }
     }
 
+    fun updateCategory(id: Int, title: String) {
+        use {
+            update(TABLE_CAT, ATTR_TITLE to title)
+                    .whereArgs("$ATTR_ID = {itemID}", "itemID" to id)
+                    .exec()
+        }
+    }
+
     fun deleteCategory(id: Int): Int = use {
         delete(TABLE_CAT, "$ATTR_ID = {itemID}", "itemID" to id)
     }
