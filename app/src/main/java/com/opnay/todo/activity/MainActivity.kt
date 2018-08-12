@@ -7,7 +7,6 @@ import android.support.v7.widget.Toolbar
 import android.widget.LinearLayout
 import com.opnay.todo.R
 import com.opnay.todo.fragment.CategoryFragment
-import com.opnay.todo.preference.TodoPreference
 import kotlinx.android.synthetic.main.activity_with_fragment.*
 
 class MainActivity : BaseActivity() {
