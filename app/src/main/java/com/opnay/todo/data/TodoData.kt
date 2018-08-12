@@ -1,9 +1,12 @@
 package com.opnay.todo.data
 
+import android.content.Context
 import android.os.Parcel
 import android.os.Parcelable
+import com.opnay.todo.sqlite.db
 import com.opnay.todo.toBoolean
 import com.opnay.todo.toByte
+import com.opnay.todo.toInt
 
 data class TodoData(val id: Int,
                     var title: String = "",
@@ -11,9 +14,12 @@ data class TodoData(val id: Int,
                     var desc: String = "",
                     var check: Boolean = false) : Parcelable {
 
-    fun toggle(t: Boolean = !check) {
-        check = t
+    fun update(ctx: Context): TodoData {
+        ctx.db.updateItem(id, title, desc, check.toInt())
+        return this
     }
+
+    fun delete(ctx: Context): Int = ctx.db.deleteItem(id)
 
     constructor(parcel: Parcel) :
             this(parcel.readInt(),
