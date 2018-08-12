@@ -41,7 +41,7 @@ class TodoAdapter(private val context: Context, val category: Category)
             // Checkbox
             chk.setOnClickListener {
                 item.apply {
-                    check != (it as CheckBox).isChecked
+                    check = chk.isChecked
                 }.update(context)
             }
 
