@@ -4,6 +4,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import com.opnay.todo.data.TodoData
 import com.opnay.todo.toBoolean
+import com.opnay.todo.toInt
 import org.jetbrains.anko.db.*
 
 val Context.db: ItemDatabaseHelper
@@ -33,7 +34,7 @@ class ItemDatabaseHelper(ctx: Context):
                     TodoData((columns.getValue(ATTR_ID) as Long).toInt(),
                             columns.getValue(ATTR_TITLE) as String,
                             (columns.getValue(ATTR_CATEGORY) as Long).toInt(),
-                            columns.getValue(ATTR_DESC) as String,
+                            (columns.getValue(ATTR_DESC) as String),
                             (columns.getValue(ATTR_COMPLETE) as Long).toBoolean())
         }
     }
@@ -65,7 +66,9 @@ class ItemDatabaseHelper(ctx: Context):
         use {
             insert(TABLE_ITEM,
                     ATTR_TITLE to title,
-                    ATTR_CATEGORY to category)
+                    ATTR_CATEGORY to category,
+                    ATTR_DESC to "",
+                    ATTR_COMPLETE to false.toInt())
         }
     }
 
