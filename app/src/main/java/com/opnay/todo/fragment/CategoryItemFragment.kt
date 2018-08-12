@@ -7,9 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.opnay.todo.R
-import com.opnay.todo.Util
-import com.opnay.todo.activity.ItemActivity
-import com.opnay.todo.preference.TodoPreference
 import com.opnay.todo.view.ProgressText
 import kotlinx.android.synthetic.main.list_category.view.*
 
@@ -21,14 +18,13 @@ class CategoryItemFragment: Fragment() {
     private val prgComplete: ProgressText by lazy { rootView!!.complete }
 
     var position: Int = 0
-    private val category: String
-        get() = TodoPreference.catData[position]
+    var category: String = ""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.list_category, container, false).apply {
             setOnClickListener {
-                Util.startActivity(context!!, ItemActivity::class.java,
-                        hashMapOf(ItemActivity.KEY_CATEGORY_INDEX to position))
+//                Util.startActivity(context!!, ItemActivity::class.java,
+//                        hashMapOf(ItemActivity.KEY_CATEGORY_INDEX to position))
             }
         }
 

@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import com.opnay.todo.R
 import com.opnay.todo.adapter.CategoryAdapter
-import com.opnay.todo.preference.TodoPreference
+import com.opnay.todo.sqlite.db
 
 class CategoryAddFragment: Fragment() {
 
@@ -18,13 +18,13 @@ class CategoryAddFragment: Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.list_category_add, container, false).apply {
-            setOnClickListener {
+            setOnClickListener { _ ->
                 AlertDialog.Builder(context).also {
-                    val edit: EditText = EditText(context)
+                    val edit = EditText(context)
                     it.setView(edit)
                     it.setTitle("Title of Category")
                     it.setPositiveButton("OK") { _, _ ->
-                        TodoPreference.catData.add(edit.text.toString())
+                        context.db.insertCategory(edit.text.toString())
                         adapter!!.notifyDataSetChanged()
                     }
                     it.setNegativeButton("Cancel", null)
