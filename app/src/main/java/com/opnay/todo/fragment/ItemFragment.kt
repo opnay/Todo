@@ -135,7 +135,7 @@ class ItemFragment: BaseFragment() {
 
     override fun updateData() {
         items.clear()
-        items.addAll(parent.db.items)
+        items.addAll(parent.db.items.filter { it.category == category.id })
         allItemsAdapter.notifyDataSetChanged()
     }
 }
