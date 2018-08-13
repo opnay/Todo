@@ -13,10 +13,12 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import at.markushi.ui.CircleButton
 import com.opnay.todo.R
+import com.opnay.todo.Util.Companion.KEY_CATEGORY
 import com.opnay.todo.activity.BaseActivity
 import com.opnay.todo.adapter.TodoAdapter
+import com.opnay.todo.data.Category
 import com.opnay.todo.data.TodoData
-import com.opnay.todo.preference.TodoPreference
+import com.opnay.todo.sqlite.db
 import kotlinx.android.synthetic.main.fragment_item_list.view.*
 import ru.dimorinny.floatingtextbutton.FloatingTextButton
 
@@ -27,9 +29,13 @@ class ItemFragment: BaseFragment() {
         parent.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     }
 
+    private val category: Category by lazy { arguments!!.getParcelable(KEY_CATEGORY) as Category }
+    private val items: ArrayList<TodoData> by lazy {
+        ArrayList(parent.db.items.filter { it.category == category.id })
+    }
+
     // Adapter
-    private val allItemsAdapter: TodoAdapter
-            by lazy { TodoAdapter(parent, TodoPreference.prefData) }
+    private val allItemsAdapter: TodoAdapter by lazy { TodoAdapter(parent, items) }
     private val viewManager: LinearLayoutManager by lazy { LinearLayoutManager(parent) }
 
     // Holder
@@ -112,19 +118,24 @@ class ItemFragment: BaseFragment() {
     }
 
     fun addNewItem(): Boolean {
-        etNew.text.toString().run {
-            TodoPreference.prefData.add(TodoData(this))
-        }
+        // Insert New Item
+        parent.db.insertItem(etNew.text.toString(), category.id)
 
+        // Notify data was changed
         updateData()
         lstTodo.smoothScrollToPosition(lstTodo.bottom)
-        TodoPreference.savePref(parent)
 
+        // Clear Input
         etNew.text.clear()
         mode = Mode.DEFAULT
         imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
+
         return true
     }
 
-    override fun updateData() { allItemsAdapter.notifyDataSetChanged() }
+    override fun updateData() {
+        items.clear()
+        items.addAll(parent.db.items.filter { it.category == category.id })
+        allItemsAdapter.notifyDataSetChanged()
+    }
 }

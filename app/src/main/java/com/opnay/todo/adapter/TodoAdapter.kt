@@ -10,7 +10,6 @@ import com.opnay.todo.Util
 import com.opnay.todo.activity.ModifyActivity
 import com.opnay.todo.app.DetailDialog
 import com.opnay.todo.data.TodoData
-import com.opnay.todo.preference.TodoPreference
 import kotlinx.android.synthetic.main.list_todo.view.*
 
 class TodoAdapter(private val context: Context, val data: ArrayList<TodoData>)
@@ -34,19 +33,16 @@ class TodoAdapter(private val context: Context, val data: ArrayList<TodoData>)
 
             // Checkbox
             chk.setOnClickListener {
-                // Update View as checked
-                item.toggle(chk.isChecked)
-                isChecked = item.check
-
-                // Save Checkbox
-                TodoPreference.savePref(context)
+                item.apply {
+                    check = chk.isChecked
+                }.update(context)
             }
 
             view.apply {
                 setOnClickListener { DetailDialog(context, item).show() }
                 setOnLongClickListener {
                     Util.startActivity(context, ModifyActivity::class.java,
-                            hashMapOf("INDEX" to position))
+                            hashMapOf(Util.KEY_ITEM to item))
                     true
                 }
             }

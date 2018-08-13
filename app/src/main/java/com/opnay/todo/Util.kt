@@ -7,6 +7,9 @@ import java.io.Serializable
 
 class Util {
     companion object {
+        const val KEY_CATEGORY = "CATEGORY"
+        const val KEY_ITEM = "ITEM"
+
         fun startActivity(ctx: Context, cls: Class<*>) { startActivity(ctx, cls, null) }
         fun startActivity(context: Context, cls: Class<*>, extra: HashMap<String, *>?) {
             Intent(context, cls).run {
@@ -21,6 +24,9 @@ class Util {
         }
     }
 }
+
+fun Boolean.toLong(): Long = if (this) 1 else 0
+fun Long.toBoolean(): Boolean = (this != 0L)
 
 fun Boolean.toInt(): Int = if (this) 1 else 0
 fun Int.toBoolean(): Boolean = (this != 0)

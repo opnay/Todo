@@ -9,7 +9,7 @@ import android.widget.TextView
 import com.opnay.todo.R
 import com.opnay.todo.Util
 import com.opnay.todo.activity.ItemActivity
-import com.opnay.todo.preference.TodoPreference
+import com.opnay.todo.data.Category
 import com.opnay.todo.view.ProgressText
 import kotlinx.android.synthetic.main.list_category.view.*
 
@@ -20,22 +20,20 @@ class CategoryItemFragment: Fragment() {
     private val tvTitle: TextView by lazy { rootView!!.title }
     private val prgComplete: ProgressText by lazy { rootView!!.complete }
 
-    var position: Int = 0
-    private val category: String
-        get() = TodoPreference.catData[position]
+    val category: Category by lazy { arguments!!.getParcelable(Util.KEY_CATEGORY) as Category }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.list_category, container, false).apply {
             setOnClickListener {
                 Util.startActivity(context!!, ItemActivity::class.java,
-                        hashMapOf(ItemActivity.KEY_CATEGORY_INDEX to position))
+                        hashMapOf(Util.KEY_CATEGORY to category))
             }
         }
 
-        tvTitle.text = category
+        tvTitle.text = category.title
 
         return rootView
     }
 
-    fun isChanged(): Boolean = (tvTitle.text != category)
+    fun isChanged(): Boolean = (tvTitle.text != category.title)
 }
