@@ -23,6 +23,7 @@
             android:layout_marginStart="@dimen/cat_card_margin"
             android:layout_marginTop="@dimen/cat_card_margin"
             android:textSize="@dimen/cat_card_title"
+            android:textColor="@color/text_black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
