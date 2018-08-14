@@ -29,4 +29,7 @@ class CategoryFragment: BaseFragment() {
         return rootView
     }
 
+    override fun updateData() {
+        pagerCategory.adapter!!.notifyDataSetChanged()
+    }
 }
