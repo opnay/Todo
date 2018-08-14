@@ -125,10 +125,12 @@ class ItemFragment: BaseFragment() {
         updateData()
         lstTodo.smoothScrollToPosition(lstTodo.bottom)
 
-        // Clear Input
-        etNew.text.clear()
+        // Change Mode
         mode = Mode.DEFAULT
         imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
+
+        // Clear Text Input
+        etNew.text.clear()
 
         return true
     }
