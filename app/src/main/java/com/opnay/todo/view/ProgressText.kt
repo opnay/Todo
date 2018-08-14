@@ -17,6 +17,13 @@ class ProgressText(context: Context, attrs: AttributeSet): LinearLayout(context,
                 max = 100
             }
 
+    var progress: Int
+        get() = progressBar.progress
+        set(v) {
+            progressBar.progress = v
+            textView.text = resources.getString(R.string.cat_fragment_complete, v)
+        }
+
     init {
         orientation = LinearLayout.VERTICAL
         addView(textView)

@@ -31,12 +31,10 @@ class CategoryItemFragment: Fragment() {
         }
 
         tvTitle.text = category.title
-        prgComplete.apply {
-            val items = category.getItems(context!!)
-            val per = Math.round(items.filter { it.check }.size.toFloat() / items.size * 100)
-            progressBar.progress = per
-            textView.text = getString(R.string.cat_fragment_complete, per)
-        }
+
+        val items = category.getItems(context!!)
+        val per = Math.round(items.filter { it.check }.size.toFloat() / items.size * 100)
+        prgComplete.progress = per
 
         return rootView
     }
