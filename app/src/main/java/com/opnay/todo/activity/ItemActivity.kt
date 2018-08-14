@@ -1,7 +1,6 @@
 package com.opnay.todo.activity
 
 import android.os.Bundle
-import com.opnay.todo.R
 import com.opnay.todo.Util.Companion.KEY_CATEGORY
 import com.opnay.todo.data.Category
 import com.opnay.todo.fragment.ItemFragment
@@ -14,14 +13,12 @@ class ItemActivity: BaseActivity() {
 
         actionBar.title = category.title
 
-        fragment = ItemFragment().apply {
-            arguments = Bundle().also {
-                it.putParcelable(KEY_CATEGORY, category)
-            }
-        }
+        supportFragmentManager.replace(ItemFragment().also{
+            // BaseActivity fragment.
+            fragment = it
 
-        supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentFrame, fragment)
-                .commit()
+            // Give category data
+            it.arguments = Bundle().apply { putParcelable(KEY_CATEGORY, category) }
+        })
     }
 }

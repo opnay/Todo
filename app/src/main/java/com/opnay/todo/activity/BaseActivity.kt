@@ -16,6 +16,11 @@ open class BaseActivity: AppCompatActivity() {
     val actionBar: ActionBar by lazy { supportActionBar!! }
     var fragment: BaseFragment? = null
 
+    // SupportFragmentManager
+    // replace function simplify.
+    fun FragmentManager.replace(fragment: BaseFragment) =
+            this.beginTransaction().replace(R.id.fragmentFrame, fragment).commit()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_with_fragment)

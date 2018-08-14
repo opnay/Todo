@@ -22,11 +22,7 @@ class MainActivity : BaseActivity() {
             setTitleTextColor(Color.WHITE)
         }
 
-        fragment = CategoryFragment()
-
-        supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentFrame, fragment)
-                .commit()
+        supportFragmentManager.replace(CategoryFragment().also { fragment = it })
     }
 
 }
