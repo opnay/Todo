@@ -16,6 +16,14 @@ open class BaseActivity: AppCompatActivity() {
     val actionBar: ActionBar by lazy { supportActionBar!! }
     var fragment: BaseFragment? = null
 
+    // App Compat Toolbar back button
+    fun ActionBar.enableBack(en: Boolean) {
+        setDisplayHomeAsUpEnabled(en)
+        setDisplayShowHomeEnabled(en)
+    }
+
+    override fun onSupportNavigateUp(): Boolean = true.also { onBackPressed() }
+
     // SupportFragmentManager
     // replace function simplify.
     fun FragmentManager.replace(fragment: BaseFragment) =

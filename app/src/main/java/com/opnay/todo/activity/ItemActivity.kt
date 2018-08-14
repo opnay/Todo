@@ -12,6 +12,7 @@ class ItemActivity: BaseActivity() {
         super.onCreate(savedInstanceState)
 
         actionBar.title = category.title
+        actionBar.enableBack(true)
 
         supportFragmentManager.replace(ItemFragment().also{
             // BaseActivity fragment.
