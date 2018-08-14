@@ -34,6 +34,7 @@ class ModifyActivity : AppCompatActivity() {
             // Enable back button
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
+            setHomeAsUpIndicator(R.drawable.ic_keyboard_arrow_left_black_24dp)
             title = this@ModifyActivity.db.category.find { it.id == data.category }!!.title
         }
 
