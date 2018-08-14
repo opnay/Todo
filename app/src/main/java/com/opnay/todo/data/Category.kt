@@ -17,6 +17,8 @@ data class Category(val id: Int, var title: String): Parcelable {
 
     fun delete(ctx: Context): Int = ctx.db.deleteCategory(id)
 
+    fun getItems(ctx: Context): List<TodoData> = ctx.db.items.filter { it.category == id }
+
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)
         parcel.writeString(title)
