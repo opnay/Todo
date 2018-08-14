@@ -28,7 +28,7 @@ class ProgressText(context: Context, attrs: AttributeSet): LinearLayout(context,
         textView.apply {
             // getDimension will return as px. so, need to be TypedValue.COMPLEX_UNIT_PX
             setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.progress_text_size))
-            setTextColor(ContextCompat.getColorStateList(context, R.color.progress_text_black))
+            setTextColor(ContextCompat.getColorStateList(context, R.color.text_black_secondary))
         }
     }
 
