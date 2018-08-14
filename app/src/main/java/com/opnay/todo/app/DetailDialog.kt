@@ -68,4 +68,6 @@ class DetailDialog(context: Context, val data: TodoData): Dialog(context, R.styl
             radius = (this.height / 2).toFloat()
         }
     }
+
+    override fun onBackPressed() = dismiss()
 }
