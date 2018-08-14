@@ -12,7 +12,10 @@ import com.opnay.todo.R
 class ProgressText(context: Context, attrs: AttributeSet): LinearLayout(context, attrs) {
     val textView: TextView = TextView(context, attrs)
     val progressBar: ProgressBar =
-            ProgressBar(context, attrs, android.R.attr.progressBarStyleHorizontal)
+            ProgressBar(context, attrs, android.R.attr.progressBarStyleHorizontal).apply {
+                // Percentage
+                max = 100
+            }
 
     init {
         orientation = LinearLayout.VERTICAL
