@@ -19,7 +19,7 @@
 
     <!-- Category Fragment -->
     <string name="cat_fragment_title">Category</string>
-    <string name="cat_fragment_complete">Complete</string>
+    <string name="cat_fragment_complete">Complete %1$d%%</string>
     <string name="cat_fragment_add">New Category</string>
 
     <!-- Dialog -->
