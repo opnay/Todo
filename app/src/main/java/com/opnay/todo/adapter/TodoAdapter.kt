@@ -11,6 +11,7 @@ import com.opnay.todo.activity.ModifyActivity
 import com.opnay.todo.app.DetailDialog
 import com.opnay.todo.data.TodoData
 import kotlinx.android.synthetic.main.list_todo.view.*
+import org.jetbrains.anko.startActivity
 
 class TodoAdapter(private val context: Context, val data: ArrayList<TodoData>)
     : RecyclerView.Adapter<TodoAdapter.ViewHolder>() {
@@ -41,8 +42,7 @@ class TodoAdapter(private val context: Context, val data: ArrayList<TodoData>)
             view.apply {
                 setOnClickListener { DetailDialog(context, item).show() }
                 setOnLongClickListener {
-                    Util.startActivity(context, ModifyActivity::class.java,
-                            hashMapOf(Util.KEY_ITEM to item))
+                    context.startActivity<ModifyActivity>(Util.KEY_ITEM to item)
                     true
                 }
             }

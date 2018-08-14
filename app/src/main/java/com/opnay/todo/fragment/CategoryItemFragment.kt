@@ -12,6 +12,7 @@ import com.opnay.todo.activity.ItemActivity
 import com.opnay.todo.data.Category
 import com.opnay.todo.view.ProgressText
 import kotlinx.android.synthetic.main.list_category.view.*
+import org.jetbrains.anko.startActivity
 
 class CategoryItemFragment: Fragment() {
 
@@ -25,8 +26,7 @@ class CategoryItemFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.list_category, container, false).apply {
             setOnClickListener {
-                Util.startActivity(context!!, ItemActivity::class.java,
-                        hashMapOf(Util.KEY_CATEGORY to category))
+                context!!.startActivity<ItemActivity>(Util.KEY_CATEGORY to category)
             }
         }
 
