@@ -32,7 +32,9 @@
         <android.support.v7.widget.RecyclerView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_margin="@dimen/cat_card_margin"
+            android:layout_marginEnd="@dimen/cat_card_margin"
+            android:layout_marginStart="@dimen/cat_card_margin"
+            android:layout_marginTop="@dimen/cat_card_margin"
             app:layout_constraintBottom_toTopOf="@+id/complete"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +45,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/cat_card_margin"
-            android:text="@string/cat_fragment_complete"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
