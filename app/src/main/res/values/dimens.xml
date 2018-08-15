@@ -29,7 +29,7 @@
     <dimen name="toolbar_font_size">20sp</dimen>
 
     <dimen name="modify_text_size">16sp</dimen>
-    <dimen name="modify_title_size">20sp</dimen>
+    <dimen name="modify_title_size">22sp</dimen>
 
 
     <!-- View -->
