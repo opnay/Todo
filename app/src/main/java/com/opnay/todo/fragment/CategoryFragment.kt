@@ -1,10 +1,13 @@
 package com.opnay.todo.fragment
 
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
 import com.opnay.todo.R
 import com.opnay.todo.activity.MainActivity
 import com.opnay.todo.adapter.CategoryAdapter
@@ -19,6 +22,17 @@ class CategoryFragment: BaseFragment() {
     // holder
     private var rootView: View? = null
     private val pagerCategory: ViewPager by lazy { rootView!!.categoryPager }
+    private val linearPager: LinearLayout by lazy { rootView!!.pagerNav }
+    private val imagePager: ArrayList<ImageView> = ArrayList()
+    var pagerPosition: Int = 0
+        set(v) {
+            if (v > dataCategory.size + 1)
+                throw IndexOutOfBoundsException()
+            else {
+                field = v
+                imagePager.forEachIndexed { i, view -> view.isEnabled = (v == i) }
+            }
+        }
 
     private val dataCategory: ArrayList<Category> by lazy { ArrayList(parent.db.category) }
 
@@ -29,6 +43,24 @@ class CategoryFragment: BaseFragment() {
 
         pagerCategory.offscreenPageLimit = 5
         pagerCategory.adapter = CategoryAdapter(parent, fragmentManager!!, dataCategory)
+        pagerCategory.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrollStateChanged(state: Int) {}
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
+            override fun onPageSelected(position: Int) { pagerPosition = position }
+        })
+
+        // Create Circle
+        // margin: start, end 8
+        // padding: all 8
+        for (i: Int in 0 .. dataCategory.size) {
+            imagePager.add(createNavIcon(R.drawable.circle_12dp,
+                    LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.WRAP_CONTENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT).apply { setMargins(8, 0, 8, 0) })
+            )
+        }
+
+        pagerPosition = 0
 
         return rootView
     }
@@ -39,4 +71,12 @@ class CategoryFragment: BaseFragment() {
         dataCategory.addAll(parent.db.category)
         pagerCategory.adapter!!.notifyDataSetChanged()
     }
+
+    private fun createNavIcon(id: Int, params: LinearLayout.LayoutParams): ImageView =
+            ImageView(parent).apply {
+                setImageDrawable(ContextCompat.getDrawable(context, id))
+                setPadding(8, 8, 8, 8)
+                isEnabled = false
+                linearPager.addView(this, params)
+            }
 }
