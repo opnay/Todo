@@ -10,10 +10,9 @@ import com.opnay.todo.Util
 import com.opnay.todo.data.Category
 import com.opnay.todo.fragment.CategoryAddFragment
 import com.opnay.todo.fragment.CategoryItemFragment
-import com.opnay.todo.sqlite.db
 
-class CategoryAdapter(val context: Context, fm: FragmentManager): FragmentStatePagerAdapter(fm) {
-    val data: ArrayList<Category> by lazy { ArrayList<Category>(context.db.category) }
+class CategoryAdapter(val context: Context, fm: FragmentManager, val data: ArrayList<Category>):
+        FragmentStatePagerAdapter(fm) {
 
     override fun getItem(pos: Int): Fragment {
         return if (pos >= data.size)
@@ -35,16 +34,5 @@ class CategoryAdapter(val context: Context, fm: FragmentManager): FragmentStateP
 
         // Refresh
         return PagerAdapter.POSITION_NONE
-    }
-
-    private fun loadData() {
-        // Load Category from db
-        data.clear()
-        data.addAll(context.db.category)
-    }
-
-    override fun notifyDataSetChanged() {
-        loadData()
-        super.notifyDataSetChanged()
     }
 }
