@@ -17,12 +17,6 @@ open class BaseActivity: AppCompatActivity() {
     var fragment: BaseFragment? = null
 
     // App Compat Toolbar back button
-    fun ActionBar.enableBack(en: Boolean) {
-        setDisplayHomeAsUpEnabled(en)
-        setDisplayShowHomeEnabled(en)
-        setHomeAsUpIndicator(R.drawable.ic_keyboard_arrow_left_black_24dp)
-    }
-
     override fun onSupportNavigateUp(): Boolean = true.also { onBackPressed() }
 
     // SupportFragmentManager

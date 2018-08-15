@@ -13,6 +13,8 @@ import com.opnay.todo.R
 import com.opnay.todo.Util
 import com.opnay.todo.data.TodoData
 import com.opnay.todo.sqlite.db
+import com.opnay.todo.view.enableBack
+import com.opnay.todo.view.setTitle
 import kotlinx.android.synthetic.main.activity_modify.*
 
 class ModifyActivity : AppCompatActivity() {
@@ -32,10 +34,8 @@ class ModifyActivity : AppCompatActivity() {
 
         supportActionBar!!.apply {
             // Enable back button
-            setDisplayHomeAsUpEnabled(true)
-            setDisplayShowHomeEnabled(true)
-            setHomeAsUpIndicator(R.drawable.ic_keyboard_arrow_left_black_24dp)
-            title = this@ModifyActivity.db.category.find { it.id == data.category }!!.title
+            enableBack(true)
+            setTitle(this@ModifyActivity.db.category.find { it.id == data.category }!!)
         }
 
         toolBar.apply {
