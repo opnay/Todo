@@ -33,9 +33,13 @@ class TodoAdapter(private val context: Context, val data: ArrayList<TodoData>)
             isChecked = item.check
 
             // Checkbox
-            chk.setOnClickListener {
+            chk.setOnCheckedChangeListener { _, ch ->
+                // View Update
+                isChecked = ch
+
+                // Data Update
                 item.apply {
-                    check = chk.isChecked
+                    check = ch
                 }.update(context)
             }
 
