@@ -7,40 +7,39 @@
     android:layout_height="match_parent"
     tools:context=".fragment.ModifyFragment">
 
-    <EditText
-        android:id="@+id/edit_title"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@android:color/transparent"
-        android:hint="@string/edit_title"
-        android:singleLine="true"
-        android:textColor="@color/whiteText"
-        android:textColorHint="@color/whiteTextSecondary"
-        android:textSize="@dimen/modify_title_size"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/edit_desc"
+    <LinearLayout
+        android:id="@+id/editGroup"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:background="@android:color/transparent"
-        android:gravity="top"
-        android:hint="@string/edit_info"
-        android:textColor="@color/whiteText"
-        android:textSize="@dimen/modify_text_size"
+        android:orientation="vertical"
+        android:padding="16dp"
         app:layout_constraintBottom_toTopOf="@+id/btnGroup"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_title" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/edit_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:hint="@string/edit_title"
+            android:singleLine="true"
+            android:textColor="@color/whiteText"
+            android:textColorHint="@color/whiteTextSecondary"
+            android:textSize="@dimen/modify_title_size" />
+
+        <EditText
+            android:id="@+id/edit_desc"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/transparent"
+            android:gravity="top"
+            android:hint="@string/edit_info"
+            android:textColor="@color/whiteText"
+            android:textSize="@dimen/modify_text_size" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/btnGroup"
