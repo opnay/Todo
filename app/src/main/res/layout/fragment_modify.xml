@@ -26,19 +26,23 @@
     <EditText
         android:id="@+id/edit_desc"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@android:color/transparent"
+        android:gravity="top"
         android:hint="@string/edit_info"
         android:textColor="@color/whiteText"
         android:textSize="@dimen/modify_text_size"
+        app:layout_constraintBottom_toTopOf="@+id/btnGroup"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_title" />
 
     <LinearLayout
+        android:id="@+id/btnGroup"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="end"
