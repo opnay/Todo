@@ -34,7 +34,7 @@ class ModifyActivity : AppCompatActivity() {
 
         supportActionBar!!.apply {
             // Enable back button
-            enableBack(true)
+            enableBack(true, Color.WHITE)
             setTitle(this@ModifyActivity.db.category.find { it.id == data.category }!!)
         }
 
