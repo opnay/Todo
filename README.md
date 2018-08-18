@@ -15,3 +15,6 @@ Todo list application for android with kotlin.
 - [Anko SQLite](https://github.com/Kotlin/anko)
 - [Floating Text Button](https://github.com/dimorinny/floating-text-button)
 - [Circle Button](https://github.com/markushi/android-circlebutton)
+
+## License
+[Apache License 2.0](https://github.com/opnay/Todo/blob/master/LICENSE)
