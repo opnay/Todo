@@ -3,8 +3,8 @@
 
 Todo list application for android with kotlin.
 
-- Min SDK: 21(5.0 Lollipop)
-- Target SDK: 27(8.1 Oreo)
+## Target
+- Android 5.0 Lollipop(API 21) ~ 8.1 Oreo(API 27)
 
 ## Download
 <a href='https://play.google.com/store/apps/details?id=com.opnay.todo&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' width="180"/></a>
