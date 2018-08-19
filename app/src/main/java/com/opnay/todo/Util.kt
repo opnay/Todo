@@ -22,5 +22,5 @@ fun Int.toBoolean(): Boolean = (this != 0)
 fun Boolean.toByte(): Byte = if (this) 1 else 0
 fun Byte.toBoolean(): Boolean = (this != 0.toByte())
 
-fun Context.getTintedDrawable(id: Int, color: Int = Color.BLACK) =
-    ContextCompat.getDrawable(this, id)?.apply { DrawableCompat.setTint(this, color) }
+fun Context.getTintedDrawable(id: Int, color: Int = Color.BLACK): Drawable =
+    ContextCompat.getDrawable(this, id)!!.apply { DrawableCompat.setTint(this, color) }
