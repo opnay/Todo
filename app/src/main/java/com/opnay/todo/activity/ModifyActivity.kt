@@ -2,10 +2,10 @@ package com.opnay.todo.activity
 
 import android.graphics.Color
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
 import com.opnay.todo.Util
 import com.opnay.todo.data.TodoData
 import com.opnay.todo.fragment.ModifyFragment
+import com.opnay.todo.getColorFromCompat
 import com.opnay.todo.sqlite.db
 import com.opnay.todo.view.enableBack
 import com.opnay.todo.view.setTitle
@@ -23,7 +23,7 @@ class ModifyActivity : BaseActivity() {
         }
 
         toolBar.apply {
-            setBackgroundColor(ContextCompat.getColor(this@ModifyActivity, android.R.color.transparent))
+            setBackgroundColor(this@ModifyActivity.getColorFromCompat(android.R.color.transparent))
             setTitleTextColor(Color.WHITE)
         }
 
