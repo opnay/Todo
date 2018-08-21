@@ -67,10 +67,6 @@ class ItemDatabaseHelper(ctx: Context):
         }
     }
 
-    fun deleteCategory(id: Int): Int = use {
-        delete(TABLE_CAT, "$ATTR_ID = {itemID}", "itemID" to id)
-    }
-
     val items: List<TodoData>
         get() = use {
             select(TABLE_ITEM, ATTR_ID, ATTR_TITLE, ATTR_CATEGORY, ATTR_DESC, ATTR_COMPLETE)
@@ -96,9 +92,8 @@ class ItemDatabaseHelper(ctx: Context):
         }
     }
 
-    fun deleteItem(id: Int): Int = use {
-        delete(TABLE_ITEM, "$ATTR_ID = {itemID}", "itemID" to id)
-    }
+    fun delete(table: String, id: Int): Int =
+            use { delete(table, "$ATTR_ID = {itemID}", "itemID" to id) }
 
     override fun onCreate(db: SQLiteDatabase) {
         db.createTable(TABLE_ITEM, true,

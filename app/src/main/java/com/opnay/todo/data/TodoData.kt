@@ -3,6 +3,7 @@ package com.opnay.todo.data
 import android.content.Context
 import android.os.Parcel
 import android.os.Parcelable
+import com.opnay.todo.sqlite.ItemDatabaseHelper.Companion.TABLE_ITEM
 import com.opnay.todo.sqlite.db
 import com.opnay.todo.toBoolean
 import com.opnay.todo.toByte
@@ -19,7 +20,7 @@ data class TodoData(val id: Int,
         return this
     }
 
-    fun delete(ctx: Context): Int = ctx.db.deleteItem(id)
+    fun delete(ctx: Context): Int = ctx.db.delete(TABLE_ITEM, id)
 
     constructor(parcel: Parcel) :
             this(parcel.readInt(),

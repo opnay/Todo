@@ -3,6 +3,7 @@ package com.opnay.todo.data
 import android.content.Context
 import android.os.Parcel
 import android.os.Parcelable
+import com.opnay.todo.sqlite.ItemDatabaseHelper.Companion.TABLE_CAT
 import com.opnay.todo.sqlite.db
 
 data class Category(val id: Int, var title: String): Parcelable {
@@ -15,7 +16,7 @@ data class Category(val id: Int, var title: String): Parcelable {
         return this
     }
 
-    fun delete(ctx: Context): Int = ctx.db.deleteCategory(id)
+    fun delete(ctx: Context): Int = ctx.db.delete(TABLE_CAT, id)
 
     fun getItems(ctx: Context): List<TodoData> = ctx.db.items.filter { it.category == id }
 
