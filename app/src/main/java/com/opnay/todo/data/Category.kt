@@ -7,19 +7,15 @@ import com.opnay.todo.sqlite.ItemDatabaseHelper.Companion.TABLE_CAT
 import com.opnay.todo.sqlite.db
 
 data class Category(val id: Int, var title: String): Parcelable {
-    constructor(parcel: Parcel) : this(
-            parcel.readInt(),
-            parcel.readString())
 
-    fun update(ctx: Context): Category {
-        ctx.db.updateCategory(id, title)
-        return this
-    }
-
+    // Database
+    fun update(ctx: Context): Category = this.apply { ctx.db.updateCategory(id, title) }
     fun delete(ctx: Context): Int = ctx.db.delete(TABLE_CAT, id)
-
     fun getItems(ctx: Context): List<TodoData> = ctx.db.items.filter { it.category == id }
 
+
+    // Parcelable
+    constructor(parcel: Parcel) : this(parcel.readInt(), parcel.readString())
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)
         parcel.writeString(title)

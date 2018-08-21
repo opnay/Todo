@@ -9,25 +9,17 @@ import com.opnay.todo.toBoolean
 import com.opnay.todo.toByte
 import com.opnay.todo.toInt
 
-data class TodoData(val id: Int,
-                    var title: String = "",
-                    var category: Int = 0,
-                    var desc: String = "",
-                    var check: Boolean = false) : Parcelable {
+data class TodoData(val id: Int, var title: String = "", var category: Int = 0,
+                    var desc: String = "", var check: Boolean = false) : Parcelable {
 
-    fun update(ctx: Context): TodoData {
-        ctx.db.updateItem(id, title, desc, check.toInt())
-        return this
-    }
-
+    // Database
+    fun update(ctx: Context): TodoData = this.apply { ctx.db.updateItem(id, title, desc, check.toInt()) }
     fun delete(ctx: Context): Int = ctx.db.delete(TABLE_ITEM, id)
 
-    constructor(parcel: Parcel) :
-            this(parcel.readInt(),
-                    parcel.readString(),
-                    parcel.readInt(),
-                    parcel.readString(),
-                    parcel.readByte().toBoolean())
+
+    // Parcelable
+    constructor(parcel: Parcel) : this(parcel.readInt(), parcel.readString(), parcel.readInt(),
+            parcel.readString(), parcel.readByte().toBoolean())
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)
