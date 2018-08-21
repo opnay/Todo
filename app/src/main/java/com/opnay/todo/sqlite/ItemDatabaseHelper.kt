@@ -59,14 +59,6 @@ class ItemDatabaseHelper(ctx: Context):
         }
     }
 
-    fun updateCategory(id: Int, title: String) {
-        use {
-            update(TABLE_CAT, ATTR_TITLE to title)
-                    .whereArgs("$ATTR_ID = {itemID}", "itemID" to id)
-                    .exec()
-        }
-    }
-
     val items: List<TodoData>
         get() = use {
             select(TABLE_ITEM, ATTR_ID, ATTR_TITLE, ATTR_CATEGORY, ATTR_DESC, ATTR_COMPLETE)
@@ -83,15 +75,8 @@ class ItemDatabaseHelper(ctx: Context):
         }
     }
 
-    fun updateItem(id: Int, title: String, desc: String, complete: Boolean) {
-        use {
-            update(TABLE_ITEM,
-                    ATTR_TITLE to title, ATTR_DESC to desc, ATTR_COMPLETE to complete.toInt())
-                    .whereArgs("$ATTR_ID = {itemID}", "itemID" to id)
-                    .exec()
-        }
-    }
-
+    fun update(table: String, id: Int, vararg values: Pair<String, Any?>) =
+            use { update(table, *values).whereArgs("$ATTR_ID = {i}", "i" to id).exec() }
     fun delete(table: String, id: Int): Int =
             use { delete(table, "$ATTR_ID = {itemID}", "itemID" to id) }
 

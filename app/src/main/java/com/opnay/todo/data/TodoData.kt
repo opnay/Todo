@@ -3,6 +3,7 @@ package com.opnay.todo.data
 import android.content.Context
 import android.os.Parcel
 import android.os.Parcelable
+import com.opnay.todo.sqlite.ItemDatabaseHelper
 import com.opnay.todo.sqlite.ItemDatabaseHelper.Companion.TABLE_ITEM
 import com.opnay.todo.sqlite.db
 import com.opnay.todo.toBoolean
@@ -13,7 +14,10 @@ data class TodoData(val id: Int, var title: String = "", var category: Int = 0,
                     var desc: String = "", var check: Boolean = false) : Parcelable {
 
     // Database
-    fun update(ctx: Context): TodoData = this.apply { ctx.db.updateItem(id, title, desc, check) }
+    fun update(ctx: Context) = ctx.db.update(TABLE_ITEM, id,
+            ItemDatabaseHelper.ATTR_TITLE to title,
+            ItemDatabaseHelper.ATTR_DESC to desc,
+            ItemDatabaseHelper.ATTR_COMPLETE to check.toInt())
     fun delete(ctx: Context): Int = ctx.db.delete(TABLE_ITEM, id)
 
 
