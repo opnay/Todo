@@ -13,7 +13,7 @@ data class TodoData(val id: Int, var title: String = "", var category: Int = 0,
                     var desc: String = "", var check: Boolean = false) : Parcelable {
 
     // Database
-    fun update(ctx: Context): TodoData = this.apply { ctx.db.updateItem(id, title, desc, check.toInt()) }
+    fun update(ctx: Context): TodoData = this.apply { ctx.db.updateItem(id, title, desc, check) }
     fun delete(ctx: Context): Int = ctx.db.delete(TABLE_ITEM, id)
 
 

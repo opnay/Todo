@@ -83,10 +83,10 @@ class ItemDatabaseHelper(ctx: Context):
         }
     }
 
-    fun updateItem(id: Int, title: String, desc: String, complete: Int) {
+    fun updateItem(id: Int, title: String, desc: String, complete: Boolean) {
         use {
             update(TABLE_ITEM,
-                    ATTR_TITLE to title, ATTR_DESC to desc, ATTR_COMPLETE to complete)
+                    ATTR_TITLE to title, ATTR_DESC to desc, ATTR_COMPLETE to complete.toInt())
                     .whereArgs("$ATTR_ID = {itemID}", "itemID" to id)
                     .exec()
         }
