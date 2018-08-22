@@ -47,10 +47,9 @@ class ItemDatabaseHelper(ctx: Context):
     }
 
     val category: List<Category>
-        get() = use {
-            select(TABLE_CAT, ATTR_ID, ATTR_TITLE)
-                    .parseList(CategoryParser)
-        }
+        get() = select(TABLE_CAT, CategoryParser)
+    val items: List<TodoData>
+        get() = select(TABLE_ITEM, TodoParser)
 
     fun insertCategory(title: String) {
         use {
@@ -58,12 +57,6 @@ class ItemDatabaseHelper(ctx: Context):
                     ItemDatabaseHelper.ATTR_TITLE to title)
         }
     }
-
-    val items: List<TodoData>
-        get() = use {
-            select(TABLE_ITEM, ATTR_ID, ATTR_TITLE, ATTR_CATEGORY, ATTR_DESC, ATTR_COMPLETE)
-                    .parseList(TodoParser)
-        }
 
     fun insertItem(title: String, category: Int) {
         use {
@@ -75,6 +68,8 @@ class ItemDatabaseHelper(ctx: Context):
         }
     }
 
+    fun <T: Any>select(table: String, parser: MapRowParser<T>) =
+            use { select(table).parseList(parser) }
     fun update(table: String, id: Int, vararg values: Pair<String, Any?>) =
             use { update(table, *values).whereArgs("$ATTR_ID = {i}", "i" to id).exec() }
     fun delete(table: String, id: Int): Int =
