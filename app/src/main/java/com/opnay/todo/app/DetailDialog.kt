@@ -27,7 +27,7 @@ class DetailDialog(context: Context, val data: TodoData): Dialog(context, R.styl
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        window.apply {
+        window!!.apply {
             setBackgroundDrawableResource(android.R.color.transparent)
         }
         requestWindowFeature(Window.FEATURE_NO_TITLE)

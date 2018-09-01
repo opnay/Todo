@@ -16,7 +16,7 @@ data class Category(val id: Int, var title: String): Parcelable {
 
 
     // Parcelable
-    constructor(parcel: Parcel) : this(parcel.readInt(), parcel.readString())
+    constructor(parcel: Parcel) : this(parcel.readInt(), parcel.readString()!!)
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)
         parcel.writeString(title)

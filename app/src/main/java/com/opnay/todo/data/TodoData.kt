@@ -22,8 +22,8 @@ data class TodoData(val id: Int, var title: String = "", var category: Int = 0,
 
 
     // Parcelable
-    constructor(parcel: Parcel) : this(parcel.readInt(), parcel.readString(), parcel.readInt(),
-            parcel.readString(), parcel.readByte().toBoolean())
+    constructor(parcel: Parcel) : this(parcel.readInt(), parcel.readString()!!, parcel.readInt(),
+            parcel.readString()!!, parcel.readByte().toBoolean())
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)
