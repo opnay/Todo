@@ -24,8 +24,10 @@ class CategoryAddFragment: Fragment() {
                     it.setView(edit)
                     it.setTitle("Title of Category")
                     it.setPositiveButton("OK") { _, _ ->
-                        context.db.insertCategory(edit.text.toString())
-                        adapter!!.notifyDataSetChanged()
+                        if (edit.text.isNotEmpty()) {
+                            context.db.insertCategory(edit.text.toString())
+                            adapter!!.notifyDataSetChanged()
+                        }
                     }
                     it.setNegativeButton("Cancel", null)
                 }.show()
