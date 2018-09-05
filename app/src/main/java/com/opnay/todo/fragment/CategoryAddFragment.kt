@@ -16,7 +16,9 @@ class CategoryAddFragment: Fragment() {
     private var rootView: View? = null
     var adapter: CategoryAdapter? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater,
+                              container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.list_category_add, container, false).apply {
             setOnClickListener { _ ->
                 AlertDialog.Builder(context).also {

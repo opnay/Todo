@@ -45,8 +45,8 @@ class CategoryFragment: BaseFragment() {
         pagerCategory.adapter = CategoryAdapter(parent, fragmentManager!!, dataCategory)
         pagerCategory.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {}
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
-            override fun onPageSelected(position: Int) { pagerPosition = position }
+            override fun onPageScrolled(pos: Int, posOffset: Float, posOffsetPixel: Int) {}
+            override fun onPageSelected(pos: Int) { pagerPosition = pos }
         })
 
         // Create Circle
@@ -56,7 +56,8 @@ class CategoryFragment: BaseFragment() {
             imagePager.add(createNavIcon(R.drawable.circle_12dp,
                     LinearLayout.LayoutParams(
                             LinearLayout.LayoutParams.WRAP_CONTENT,
-                            LinearLayout.LayoutParams.WRAP_CONTENT).apply { setMargins(8, 0, 8, 0) })
+                            LinearLayout.LayoutParams.WRAP_CONTENT)
+                            .apply { setMargins(8, 0, 8, 0) })
             )
         }
 

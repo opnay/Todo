@@ -23,7 +23,9 @@ class CategoryItemFragment: Fragment() {
 
     val category: Category by lazy { arguments!!.getParcelable(Util.KEY_CATEGORY) as Category }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater,
+                              container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.list_category, container, false).apply {
             setOnClickListener {
                 context!!.startActivity<ItemActivity>(Util.KEY_CATEGORY to category)
