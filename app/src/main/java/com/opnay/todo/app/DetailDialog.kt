@@ -20,7 +20,6 @@ class DetailDialog(context: Context, val data: TodoData): Dialog(context, R.styl
     private val layoutDesc: LinearLayout by lazy { layout_desc }
 
     private val tvTitle: TextView by lazy { title }
-    private val tvDate: TextView by lazy { date }
     private val tvDesc: TextView by lazy { desc }
     private val btnOK: FloatingTextButton by lazy { dialog_ok as FloatingTextButton }
 
