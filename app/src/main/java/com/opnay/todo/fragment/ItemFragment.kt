@@ -87,7 +87,7 @@ class ItemFragment: BaseFragment() {
                               savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_item_list, container, false)
 
-        fabAdd.setOnClickListener {
+        fabAdd.setOnClickListener { _ ->
             mode = Mode.ADD
             etNew.requestFocus()
             imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 1)

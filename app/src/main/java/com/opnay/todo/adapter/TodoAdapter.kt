@@ -44,8 +44,8 @@ class TodoAdapter(private val context: Context, val data: ArrayList<TodoData>)
             }
 
             view.apply {
-                setOnClickListener { DetailDialog(context, item).show() }
-                setOnLongClickListener {
+                setOnClickListener { _ -> DetailDialog(context, item).show() }
+                setOnLongClickListener { _ ->
                     context.startActivity<ModifyActivity>(Util.KEY_ITEM to item)
                     true
                 }

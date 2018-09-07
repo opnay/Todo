@@ -27,7 +27,7 @@ class CategoryItemFragment: Fragment() {
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.list_category, container, false).apply {
-            setOnClickListener {
+            setOnClickListener { _ ->
                 context!!.startActivity<ItemActivity>(Util.KEY_CATEGORY to category)
             }
         }

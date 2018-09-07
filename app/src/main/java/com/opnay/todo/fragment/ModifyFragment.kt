@@ -31,7 +31,7 @@ class ModifyFragment: BaseFragment() {
                               savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_modify, container, false)
 
-        btnOK.setOnClickListener {
+        btnOK.setOnClickListener { _ ->
             if (tvTitle.text.isEmpty()) {
                 Snackbar.make(rootView!!, "제목을 다시 입력해주세요.", Snackbar.LENGTH_LONG)
                         .setAction("OK") { tvTitle.requestFocus() }
@@ -48,7 +48,7 @@ class ModifyFragment: BaseFragment() {
             }
         }
 
-        btnDel.setOnClickListener {
+        btnDel.setOnClickListener { _ ->
             data.delete(parent)
             parent.finish()
         }
