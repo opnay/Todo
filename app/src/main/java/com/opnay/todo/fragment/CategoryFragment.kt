@@ -53,7 +53,7 @@ class CategoryFragment: BaseFragment() {
         // margin: start, end 8
         // padding: all 8
         for (i: Int in 0 .. dataCategory.size) {
-            imagePager.add(createNavIcon(R.drawable.circle_12dp,
+            imagePager.add(createNavIcon(R.drawable.nav_circle_12dp,
                     LinearLayout.LayoutParams(
                             LinearLayout.LayoutParams.WRAP_CONTENT,
                             LinearLayout.LayoutParams.WRAP_CONTENT)
