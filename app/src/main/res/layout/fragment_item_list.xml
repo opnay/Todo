@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/floating_margin"
         app:floating_background_color="@color/colorAccent"
-        app:floating_left_icon="@drawable/ic_add_white_24dp"
+        app:floating_left_icon="@drawable/ic_add_24dp"
         app:floating_title="@string/add_title"
         app:floating_title_color="@android:color/white"
         app:layout_behavior="ru.dimorinny.floatingtextbutton.behavior.SnackbarBehavior"

@@ -29,7 +29,7 @@
                 android:layout_height="64dp"
                 android:tint="@color/blackTextSecondary"
                 android:tintMode="multiply"
-                app:srcCompat="@drawable/ic_add_black_24dp" />
+                app:srcCompat="@drawable/ic_add_24dp" />
 
             <TextView
                 android:id="@+id/title"
