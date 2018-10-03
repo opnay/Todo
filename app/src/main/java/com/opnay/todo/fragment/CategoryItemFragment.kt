@@ -1,5 +1,6 @@
 package com.opnay.todo.fragment
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +11,8 @@ import com.opnay.todo.R
 import com.opnay.todo.Util
 import com.opnay.todo.activity.ItemActivity
 import com.opnay.todo.data.Category
+import com.opnay.todo.sqlite.ItemDatabaseHelper
+import com.opnay.todo.sqlite.db
 import com.opnay.todo.view.ProgressText
 import kotlinx.android.synthetic.main.list_category.view.*
 import org.jetbrains.anko.startActivity
@@ -29,6 +32,16 @@ class CategoryItemFragment: Fragment() {
         rootView = inflater.inflate(R.layout.list_category, container, false).apply {
             setOnClickListener { _ ->
                 context!!.startActivity<ItemActivity>(Util.KEY_CATEGORY to category)
+            }
+
+            setOnLongClickListener { _ ->
+                AlertDialog.Builder(context).also {
+                    it.setTitle("Remove This?")
+                    it.setPositiveButton("Remove") { _, _ ->
+                        context.db.delete(ItemDatabaseHelper.TABLE_CAT, category.id)
+                    }
+                }.show()
+                true
             }
         }
 
