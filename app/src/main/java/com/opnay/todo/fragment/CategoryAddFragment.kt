@@ -33,7 +33,7 @@ class CategoryAddFragment: Fragment() {
                 it.setPositiveButton("OK") { _, _ ->
                     if (edit.text.isNotEmpty()) {
                         context!!.db.insertCategory(edit.text.toString())
-                        adapter!!.notifyDataSetChanged()
+                        adapter!!.parent.updateData()
                     }
                 }
                 it.setNegativeButton("Cancel", null)

@@ -26,12 +26,9 @@ class CategoryFragment: BaseFragment() {
     private val imagePager: ArrayList<ImageView> = ArrayList()
     var pagerPosition: Int = 0
         set(v) {
-            if (v > dataCategory.size + 1)
-                throw IndexOutOfBoundsException()
-            else {
-                field = v
-                imagePager.forEachIndexed { i, view -> view.isEnabled = (v == i) }
-            }
+            imagePager.getOrNull(field)!!.isEnabled = false
+            imagePager.getOrNull(v)!!.isEnabled = true
+            field = v
         }
 
     private val dataCategory: ArrayList<Category> by lazy { ArrayList(parent.db.category) }
@@ -42,25 +39,14 @@ class CategoryFragment: BaseFragment() {
         rootView = inflater.inflate(R.layout.fragment_category, container, false)
 
         pagerCategory.offscreenPageLimit = 5
-        pagerCategory.adapter = CategoryAdapter(parent, fragmentManager!!, dataCategory)
+        pagerCategory.adapter = CategoryAdapter(this, fragmentManager!!, dataCategory)
         pagerCategory.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {}
             override fun onPageScrolled(pos: Int, posOffset: Float, posOffsetPixel: Int) {}
             override fun onPageSelected(pos: Int) { pagerPosition = pos }
         })
 
-        // Create Circle
-        // margin: start, end 8
-        // padding: all 8
-        for (i: Int in 0 .. dataCategory.size) {
-            imagePager.add(createNavIcon(R.drawable.nav_circle_12dp,
-                    LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.WRAP_CONTENT,
-                            LinearLayout.LayoutParams.WRAP_CONTENT)
-                            .apply { setMargins(8, 0, 8, 0) })
-            )
-        }
-
+        updateData()
         pagerPosition = 0
 
         return rootView
@@ -71,6 +57,25 @@ class CategoryFragment: BaseFragment() {
         dataCategory.clear()
         dataCategory.addAll(parent.db.category)
         pagerCategory.adapter!!.notifyDataSetChanged()
+
+        // Create Circle
+        // margin: start, end 8
+        // padding: all 8
+        if (imagePager.size > dataCategory.size) {  // Remove NavIcon
+            imagePager.removeAll { true }
+            linearPager.removeAllViews()
+        }
+        for (i: Int in 0 .. dataCategory.size) {
+            if (imagePager.getOrNull(i) == null) {
+                createNavIcon(R.drawable.nav_circle_12dp,
+                        LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.WRAP_CONTENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT
+                        ).apply { setMargins(8, 0, 8, 0) }
+                ).let { imagePager.add(it) }
+            }
+            if (i == pagerPosition) imagePager[i].isEnabled = true
+        }
     }
 
     private fun createNavIcon(id: Int, params: LinearLayout.LayoutParams): ImageView =

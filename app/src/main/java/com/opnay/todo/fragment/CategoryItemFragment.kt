@@ -10,6 +10,7 @@ import android.widget.TextView
 import com.opnay.todo.R
 import com.opnay.todo.Util
 import com.opnay.todo.activity.ItemActivity
+import com.opnay.todo.adapter.CategoryAdapter
 import com.opnay.todo.data.Category
 import com.opnay.todo.sqlite.ItemDatabaseHelper
 import com.opnay.todo.sqlite.db
@@ -21,6 +22,7 @@ class CategoryItemFragment: Fragment() {
 
     // Holder
     private var rootView: View? = null
+    var adapter: CategoryAdapter? = null
     private val tvTitle: TextView by lazy { rootView!!.title }
     private val prgComplete: ProgressText by lazy { rootView!!.complete }
 
@@ -39,6 +41,7 @@ class CategoryItemFragment: Fragment() {
                     it.setTitle("Remove This?")
                     it.setPositiveButton("Remove") { _, _ ->
                         context.db.delete(ItemDatabaseHelper.TABLE_CAT, category.id)
+                        adapter!!.parent.updateData()
                     }
                 }.show()
                 true
