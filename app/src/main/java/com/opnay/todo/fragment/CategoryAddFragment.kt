@@ -19,23 +19,23 @@ class CategoryAddFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        rootView = inflater.inflate(R.layout.list_category_add, container, false).apply {
-            setOnClickListener { _ ->
-                AlertDialog.Builder(context).also {
-                    val edit = EditText(context)
-                    it.setView(edit)
-                    it.setTitle("Title of Category")
-                    it.setPositiveButton("OK") { _, _ ->
-                        if (edit.text.isNotEmpty()) {
-                            context.db.insertCategory(edit.text.toString())
-                            adapter!!.notifyDataSetChanged()
-                        }
-                    }
-                    it.setNegativeButton("Cancel", null)
-                }.show()
-            }
-        }
+        rootView = inflater.inflate(R.layout.list_category_add, container, false)
+                .apply { setOnClickListener { removeAlertBuilder().show() } }
 
         return rootView
     }
+
+    private fun removeAlertBuilder(): AlertDialog.Builder =
+            AlertDialog.Builder(context).also {
+                val edit = EditText(context)
+                it.setView(edit)
+                it.setTitle("Title of Category")
+                it.setPositiveButton("OK") { _, _ ->
+                    if (edit.text.isNotEmpty()) {
+                        context!!.db.insertCategory(edit.text.toString())
+                        adapter!!.notifyDataSetChanged()
+                    }
+                }
+                it.setNegativeButton("Cancel", null)
+            }
 }
